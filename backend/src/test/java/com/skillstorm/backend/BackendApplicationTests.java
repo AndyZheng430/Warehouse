@@ -1,10 +1,10 @@
-package com.skillstorm.warehouse;
+package com.skillstorm.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WarehouseApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
