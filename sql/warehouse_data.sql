@@ -1,0 +1,2 @@
+INSERT INTO Warehouse VALUES 
+();

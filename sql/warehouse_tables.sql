@@ -1,4 +1,6 @@
-CREATE TABLE IF NOT EXISTS Warehouse (
+DROP TABLE IF EXISTS Warehouse, Storage, Item, ItemFormula;
+
+CREATE TABLE Warehouse (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
     location VARCHAR(255),
