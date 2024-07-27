@@ -1,1 +1,1 @@
-CREATE DATABASE Warehouse;
+CREATE DATABASE warehouse;
