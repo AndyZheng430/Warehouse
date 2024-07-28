@@ -1,7 +1,6 @@
 package com.skillstorm.backend.models;
 
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
@@ -9,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 
 public class Storage { 
@@ -71,7 +69,7 @@ public class Storage {
 
     @Override
     public String toString() {
-        return "Storage [id=" + id + ", amount=" + amount + ", itemId=" + itemId + ", warehouse=" + warehouse + "]";
+        return "Storage [id=" + id + ", amount=" + amount + ", itemId=" + item + ", warehouse=" + warehouse + "]";
     }
 
 }
