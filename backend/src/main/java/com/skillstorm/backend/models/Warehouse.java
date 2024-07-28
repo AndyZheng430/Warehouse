@@ -2,6 +2,8 @@ package com.skillstorm.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,8 +29,9 @@ public class Warehouse {
     @Min(0)
     private int maxCapacity;
 
-    @OneToMany(mappedBy = "warehouse_id", targetEntity = Storage.class)
-    private List<Warehouse> storages;
+    @OneToMany(mappedBy = "warehouse", targetEntity = Storage.class)
+    @JsonBackReference
+    private List<Storage> storages;
     
     public Warehouse() {
     }
@@ -81,11 +84,18 @@ public class Warehouse {
         this.maxCapacity = maxCapacity;
     }
 
+    public List<Storage> getStorage() {
+        return storages;
+    }
+
+    public void setStorage(List<Storage> storages) {
+        this.storages = storages;
+    }
+
     @Override
     public String toString() {
         return "Warehouse [id=" + id + ", name=" + name + ", location=" + location + ", owner=" + owner
                 + ", maxCapacity=" + maxCapacity + "]";
     }
 
-    
 }
