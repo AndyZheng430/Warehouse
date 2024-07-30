@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@Table(name = "ItemFormula")
+@Table(name = "item_formula")
 public class ItemFormula {
 
     @Id
