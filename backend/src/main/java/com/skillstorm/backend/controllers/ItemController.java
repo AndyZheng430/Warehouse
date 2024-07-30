@@ -7,6 +7,8 @@ import com.skillstorm.backend.models.Item;
 import com.skillstorm.backend.models.Warehouse;
 import com.skillstorm.backend.services.ItemService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +42,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Item> getMethodName(@PathVariable int id) {
-            Optional<Item> item = itemService.findById(id);
+        Optional<Item> item = itemService.findById(id);
         if (item.isPresent()) {
             return ResponseEntity.ok(item.get());
         }
@@ -48,13 +50,20 @@ public class ItemController {
     }
     
     // TODO get by name
-
+    @GetMapping("/{name}")
+    public ResponseEntity<Item> getMethodName(@RequestParam String name) {
+        Optional<Item> item = itemService.findByName(name);
+        if (item.isPresent()) {
+            return ResponseEntity.ok(item.get());
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
 
     @PostMapping("/create")
-    public String postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
-        
-        return entity;
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Item createItem(@Valid @RequestBody Item item) {
+        return itemService.save(item);
     }
     
     @PutMapping("edit/{id}")

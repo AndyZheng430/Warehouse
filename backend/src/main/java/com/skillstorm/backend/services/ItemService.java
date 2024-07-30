@@ -28,6 +28,10 @@ public class ItemService {
         return repo.findById(id);
     }
 
+    public List<Item> findByName(String name) {
+        return repo.findByName(name);
+    }
+
     public List<Item> findAll() {
         return repo.findAll();
     }
