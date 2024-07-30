@@ -1,6 +1,6 @@
 package com.skillstorm.backend.models;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -26,9 +26,9 @@ public class Item {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "item", targetEntity = Storage.class)
+    @OneToMany(mappedBy = "item", targetEntity = Inventory.class)
     @JsonBackReference
-    private Set<Storage> storageId;
+    private List<Inventory> storageId;
 
     public Item() {
     }
@@ -63,11 +63,11 @@ public class Item {
         this.description = description;
     }
 
-    public Set<Storage> getStorageId() {
+    public List<Inventory> getStorageId() {
         return storageId;
     }
 
-    public void setStorageId(Set<Storage> storageId) {
+    public void setStorageId(List<Inventory> storageId) {
         this.storageId = storageId;
     }
 

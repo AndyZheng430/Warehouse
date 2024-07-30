@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skillstorm.backend.models.Item;
-import com.skillstorm.backend.models.Warehouse;
 import com.skillstorm.backend.services.ItemService;
 
 import jakarta.validation.Valid;
@@ -49,16 +48,10 @@ public class ItemController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    // TODO get by name
     @GetMapping("/{name}")
-    public ResponseEntity<Item> getMethodName(@RequestParam String name) {
-        Optional<Item> item = itemService.findByName(name);
-        if (item.isPresent()) {
-            return ResponseEntity.ok(item.get());
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public List<Item> getMethodName(@RequestParam String name) {
+        return itemService.findByName(name);
     }
-    
 
     @PostMapping("/create")
     @ResponseStatus(code = HttpStatus.CREATED)

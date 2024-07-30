@@ -33,9 +33,9 @@ public class Warehouse {
     @Min(0)
     private int maxCapacity;
 
-    @OneToMany(mappedBy = "warehouse", targetEntity = Storage.class)
+    @OneToMany(mappedBy = "warehouse", targetEntity = Inventory.class)
     @JsonBackReference
-    private List<Storage> storages;
+    private List<Inventory> storages;
     
     public Warehouse() {
     }
@@ -88,11 +88,11 @@ public class Warehouse {
         this.maxCapacity = maxCapacity;
     }
 
-    public List<Storage> getStorage() {
+    public List<Inventory> getStorage() {
         return storages;
     }
 
-    public void setStorage(List<Storage> storages) {
+    public void setStorage(List<Inventory> storages) {
         this.storages = storages;
     }
 

@@ -14,11 +14,11 @@ CREATE TABLE item (
     description Text
 );
 
-CREATE TABLE storage (
-    id BIGSERIAL PRIMARY KEY,
-	item_id BIGINT references item(id),
+CREATE TABLE inventory (
     warehouse_id BIGINT references warehouse(id),
-	amount BIGINT
+	item_id BIGINT references item(id),
+	amount BIGINT,
+    PRIMARY KEY (warehouse_id, item_id)
 );
 
 CREATE TABLE item_formula (
