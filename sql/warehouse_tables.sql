@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS warehouse, storage, item, itemFormula;
+DROP TABLE IF EXISTS item_formula, inventory, warehouse, item;
 
 CREATE TABLE warehouse (
     id BIGSERIAL PRIMARY KEY,

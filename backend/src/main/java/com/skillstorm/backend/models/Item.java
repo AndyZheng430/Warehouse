@@ -28,7 +28,7 @@ public class Item {
 
     @OneToMany(mappedBy = "item", targetEntity = Inventory.class)
     @JsonBackReference
-    private List<Inventory> storageId;
+    private List<Inventory> inventories;
 
     public Item() {
     }
@@ -63,12 +63,12 @@ public class Item {
         this.description = description;
     }
 
-    public List<Inventory> getStorageId() {
-        return storageId;
+    public List<Inventory> getinventory() {
+        return inventories;
     }
 
-    public void setStorageId(List<Inventory> storageId) {
-        this.storageId = storageId;
+    public void setinventory(List<Inventory> inventories) {
+        this.inventories = inventories;
     }
 
     @Override
