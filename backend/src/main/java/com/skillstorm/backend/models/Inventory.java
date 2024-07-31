@@ -1,0 +1,109 @@
+package com.skillstorm.backend.models;
+
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "inventory")
+@IdClass(InventoryKey.class)
+public class Inventory { 
+    
+    @Id
+    @Column(name = "warehouse_id")
+    private long warehouseId;
+
+    @Id
+    @Column(name = "item_id")
+    private long itemId;
+
+    @Column(name = "amount")
+    private long amount;
+
+    // @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
+    // @JoinColumn(name = "item_id", nullable = false, insertable = false, updatable = false)
+    @ManyToOne()
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "item_id")
+    @JsonIdentityReference(alwaysAsId= true)
+    @JsonIgnore
+    private Item item;
+
+    // @ManyToOne(fetch = FetchType.LAZY, targetEntity = Warehouse.class)
+    // @JoinColumn(name = "warehouse_id", nullable = false, insertable = false, updatable = false)
+    @ManyToOne()
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "warehouse_id")
+    @JsonIdentityReference(alwaysAsId= true)
+    @JsonIgnore
+    private Warehouse warehouse; 
+
+    public Inventory() {
+    }
+
+    public Inventory(long warehouseId, long itemId, long amount, Warehouse warehouse, Item item) {
+        this.warehouseId = warehouseId;
+        this.itemId = itemId;
+        this.amount = amount;
+        this.warehouse = warehouse;
+        this.item = item;
+    }
+
+    public long getWarehouseId() {
+        return warehouseId;
+    }
+
+    public void setWarehouseId(long warehouseId) {
+        this.warehouseId = warehouseId;
+    }
+
+    public long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
+    }
+
+    public long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventory [warehouseId=" + warehouseId + ", itemId=" + itemId + ", amount=" + amount + "]";
+    }
+
+}

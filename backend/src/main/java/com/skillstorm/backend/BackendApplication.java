@@ -1,13 +1,13 @@
-package com.skillstorm.warehouse;
+package com.skillstorm.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WarehouseApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WarehouseApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
