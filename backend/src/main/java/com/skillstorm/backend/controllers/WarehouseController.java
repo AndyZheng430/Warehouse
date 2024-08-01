@@ -3,6 +3,7 @@ package com.skillstorm.backend.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skillstorm.backend.dtos.WarehouseDto;
 import com.skillstorm.backend.models.Warehouse;
 import com.skillstorm.backend.services.WarehouseService;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/warehouses")
+@CrossOrigin
 public class WarehouseController {
     
     private WarehouseService warehouseService;
@@ -32,17 +35,14 @@ public class WarehouseController {
     }
 
     @GetMapping()
-    public List<Warehouse> getAll() {
+    public List<WarehouseDto> getAll() {
         return warehouseService.findAll();
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<Warehouse> getWarehouse(@PathVariable int id) {
-        Optional<Warehouse> warehouse = warehouseService.findById(id);
-        if (warehouse.isPresent()) {
-            return ResponseEntity.ok(warehouse.get());
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<WarehouseDto> getWarehouse(@PathVariable int id) {
+        WarehouseDto warehouse = warehouseService.findById(id);
+        return ResponseEntity.ok(warehouse);
     }
     
     @PostMapping("/create")

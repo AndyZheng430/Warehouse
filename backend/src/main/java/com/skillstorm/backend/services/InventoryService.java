@@ -31,15 +31,15 @@ public class InventoryService {
 
     @Transactional
     public Inventory save(InventoryDto dto) {
-        Optional<Warehouse> warehouse = warehouseRepository.findById(dto.getWarehouseId());
-        Optional<Item> item = itemRepository.findById(dto.getItemId());
+        Optional<Warehouse> warehouse = warehouseRepository.findById((int) dto.getWarehouseId());
+        Optional<Item> item = itemRepository.findById((int) dto.getItem().getItemId());
         if (!warehouse.isPresent()) {
             throw new RuntimeException("Warehouse not found");
         }
         if (!item.isPresent()) {
             throw new RuntimeException("Item not found");
         }
-        return inventoryRepository.save(new Inventory(dto.getWarehouseId(), dto.getItemId(), dto.getAmount(), warehouse.get(), item.get()));
+        return inventoryRepository.save(new Inventory(dto.getWarehouseId(), dto.getItem().getItemId(), dto.getAmount(), warehouse.get(), item.get()));
 
     }
 

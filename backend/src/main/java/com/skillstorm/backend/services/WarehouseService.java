@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.skillstorm.backend.dtos.WarehouseDto;
+import com.skillstorm.backend.mapper.WarehouseMapper;
 import com.skillstorm.backend.models.Warehouse;
 import com.skillstorm.backend.repositories.WarehouseRepository;
 
@@ -12,7 +14,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class WarehouseService {
-    
+
     private WarehouseRepository repo;
 
     public WarehouseService(WarehouseRepository repo) {
@@ -23,14 +25,15 @@ public class WarehouseService {
     public Warehouse save(Warehouse warehouse) {
         return repo.save(warehouse);
     }
-
-    public Optional<Warehouse> findById(int id) {
-        // need to throw exception if id is not found
-        return repo.findById(id);
+    
+    public WarehouseDto findById(int id) {
+        Warehouse warehouse = repo.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found with id " + id));
+        WarehouseDto dto = WarehouseMapper.toDTO(warehouse);
+        return dto;
     }
 
-    public List<Warehouse> findAll() {
-        return repo.findAll();
+    public List<WarehouseDto> findAll() {
+        return repo.findAll().stream().map((Warehouse warehouse)->WarehouseMapper.toDTO(warehouse)).toList();
     }
 
     @Transactional
