@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { Record } from '../components/Record.jsx';
 import { TableLabel } from '../components/TableLabel.jsx';
 import { WarehouseTitle } from '../components/WarehouseTitle.jsx';
+import { CreateWarehouseModal } from '../components/CreateWarehouseModal.jsx';
 
 export const Warehouse = () => {
 
 	const [warehouses, setWarehouses] = useState([]);
+  const [showWarehouseModal, setShowWarehouseModal] = useState(false);
 
 	console.log(import.meta.env.VITE_GET_WAREHOUSES);
 	
@@ -21,7 +23,7 @@ export const Warehouse = () => {
 
 	return (
 		<>
-			<WarehouseTitle />
+			<WarehouseTitle setShowModal={setShowWarehouseModal} />
 			<hr style={{width: '90%'}}/> 
 			<TableLabel name="Name" owner="Owner" location="Location" capacity="Max Capacity" />
 			<hr />
@@ -33,6 +35,7 @@ export const Warehouse = () => {
 					</>
 				)
 			)}
+			{ showWarehouseModal && <CreateWarehouseModal setShowModal={setShowWarehouseModal}/> }
 		</>
 	);
 }

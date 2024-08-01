@@ -1,13 +1,16 @@
 import './WarehouseTitle.css';
 
-export const WarehouseTitle = () => {
+export const WarehouseTitle = ({setShowModal}) => {
 
+  function displayModal(e) {
+    setShowModal(true);
+  }
   
   return (
     <div className="title-container">
       <div className="title">Warehouses</div>
 			<div className="create"> 
-				<button>
+				<button onClick={displayModal}>
 					Add Warehouse
 				</button>
 			</div>
