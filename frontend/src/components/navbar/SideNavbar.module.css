@@ -1,0 +1,38 @@
+
+nav {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #201E43;
+  transition: 0.5s;
+  z-index: 1;
+  text-align: left;
+  color: #EEEEEE;
+}
+
+nav a {
+  color: #EEEEEE;
+  display: block;
+  padding: 10px;
+}
+
+nav svg {
+  padding-left: 5px;
+}
+
+nav span {
+  font-weight: 500;
+}
+
+.minimize {
+  width: 4%;
+}
+
+.maximize {
+  width: 10%;
+}
+
+.toggle {
+  padding: 10px;
+}

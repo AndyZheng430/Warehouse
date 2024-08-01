@@ -1,0 +1,19 @@
+.tableHeader {
+    width: 100%;
+}
+
+.tableLabel {
+    font-weight: bold;
+}
+
+.col-5 {
+    width: 20%;
+    display: inline-block;
+    font-size: 18px;
+    text-align: left;
+}
+
+.col-10 {
+    width: 10%;
+    display: inline-block;
+}

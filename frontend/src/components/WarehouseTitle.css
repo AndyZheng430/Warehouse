@@ -1,0 +1,24 @@
+.title-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.title, .create {
+    display: inline-block;
+    height: 100%;
+    margin: auto 0;
+}
+
+.title {
+    width: 60%;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.create {
+    width: 20%;
+    text-align: right;
+    margin-right: 5%;
+}
