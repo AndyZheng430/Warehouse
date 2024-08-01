@@ -28,7 +28,6 @@ public class Item {
     private String description;
 
     @OneToMany(mappedBy = "item", targetEntity = Inventory.class)
-    // @JsonBackReference
     @JsonManagedReference
     private List<Inventory> inventories;
 

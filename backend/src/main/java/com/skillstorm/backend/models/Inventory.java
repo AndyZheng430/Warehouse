@@ -25,12 +25,10 @@ public class Inventory {
     
     @Id
     @Column(name = "warehouse_id")
-    // @JsonIgnore
     private long warehouseId;
 
     @Id
     @Column(name = "item_id")
-    // @JsonIgnore
     private long itemId;
 
     @Column(name = "amount")

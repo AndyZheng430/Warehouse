@@ -16,6 +16,7 @@ export const Warehouse = () => {
 			.then(response => response.json())
 			.then(data => {
 				setWarehouses(data);
+				// console.log(data);
 			})
 			.catch(error => {console.log(error)});
 	}, []);
@@ -29,10 +30,7 @@ export const Warehouse = () => {
 			<hr />
 			{warehouses && warehouses.map(
 				warehouse => (
-					<>
-						<Record key={warehouse.id} name={warehouse.name} location={warehouse.location} owner={warehouse.owner} capacity={warehouse.maxCapacity} />
-						<hr />
-					</>
+					<Record key={warehouse.id} name={warehouse.name} location={warehouse.location} owner={warehouse.owner} capacity={warehouse.maxCapacity} inventories={warehouse.inventory}/>
 				)
 			)}
 			{ showWarehouseModal && <CreateWarehouseModal setShowModal={setShowWarehouseModal}/> }

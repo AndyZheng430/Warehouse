@@ -32,7 +32,7 @@ public class Warehouse {
     private String owner;
 
     @Min(0)
-    private int maxCapacity;
+    private long maxCapacity;
 
     @OneToMany(mappedBy = "warehouse", targetEntity = Inventory.class)
     @JsonManagedReference
@@ -41,7 +41,7 @@ public class Warehouse {
     public Warehouse() {
     }
 
-    public Warehouse(long id, String name, String location, String owner, @Min(0) int maxCapacity) {
+    public Warehouse(long id, String name, String location, String owner, @Min(0) long maxCapacity) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -81,11 +81,11 @@ public class Warehouse {
         this.owner = owner;
     }
 
-    public int getMaxCapacity() {
+    public long getMaxCapacity() {
         return maxCapacity;
     }
 
-    public void setMaxCapacity(int maxCapacity) {
+    public void setMaxCapacity(long maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
 

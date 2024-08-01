@@ -7,12 +7,12 @@ public class WarehouseDto {
     private String name;
     private String location;
     private String owner;
-    private int maxCapacity;
+    private long maxCapacity;
     private List<InventoryDto> inventory;
 
     public WarehouseDto() {}
     
-    public WarehouseDto(long id, String name, String location, String owner, int maxCapacity,
+    public WarehouseDto(long id, String name, String location, String owner, long maxCapacity,
             List<InventoryDto> inventory) {
         this.id = id;
         this.name = name;
@@ -54,11 +54,11 @@ public class WarehouseDto {
         this.owner = owner;
     }
 
-    public int getMaxCapacity() {
+    public long getMaxCapacity() {
         return maxCapacity;
     }
 
-    public void setMaxCapacity(int maxCapacity) {
+    public void setMaxCapacity(long maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
 

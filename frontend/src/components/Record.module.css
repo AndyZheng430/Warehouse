@@ -7,6 +7,7 @@
     width: 20%;
     display: inline-block;
     font-size: 18px;
+    font-weight: 700;
     text-align: left;
 }
 
@@ -25,8 +26,5 @@
 }
 
 .display {
-    border-radius: 50%;
-    border: 1px solid #508C9B;
-    background-color: #508C9B;
     margin: 5px;
 }
