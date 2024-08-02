@@ -1,0 +1,24 @@
+.container {
+	width: 100%;
+}
+
+.label {
+	font-weight: 450;
+}
+
+.col {
+	width: 20%;
+	display: inline-block;
+	font-size: 18px;
+	text-align: left;
+}
+
+.check {
+	width: 4%;
+	display: inline-block;
+}
+
+.option {
+	width: 4%;
+	display: inline-block;
+}

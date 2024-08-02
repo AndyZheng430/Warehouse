@@ -9,4 +9,5 @@
 .edit:hover {
     background-color: #134B70;
     color: #EEEEEE;
+    cursor: pointer;
 }

@@ -35,7 +35,7 @@ public class Warehouse {
     private long maxCapacity;
 
     @OneToMany(mappedBy = "warehouse", targetEntity = Inventory.class)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Inventory> inventories;
     
     public Warehouse() {

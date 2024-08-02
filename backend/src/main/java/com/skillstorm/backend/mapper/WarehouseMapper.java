@@ -16,7 +16,7 @@ public class WarehouseMapper {
     public static WarehouseDto toDTO(Warehouse warehouse) {
         WarehouseDto dto = new WarehouseDto();
         dto.setId(warehouse.getId());
-        dto.setName(warehouse.getLocation());
+        dto.setName(warehouse.getName());
         dto.setOwner(warehouse.getOwner());
         dto.setLocation(warehouse.getLocation());
         dto.setMaxCapacity(warehouse.getMaxCapacity());

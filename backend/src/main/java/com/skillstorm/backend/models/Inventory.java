@@ -37,14 +37,16 @@ public class Inventory {
     @ManyToOne(targetEntity = Item.class)
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "item_id")
-    @JsonBackReference
+    // @JsonBackReference
+    @JsonManagedReference
     @JsonIgnore
     private Item item;
 
     @ManyToOne(targetEntity = Warehouse.class)
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "warehouse_id")
-    @JsonBackReference
+    // @JsonBackReference
+    @JsonManagedReference
     @JsonIgnore
     private Warehouse warehouse; 
 
