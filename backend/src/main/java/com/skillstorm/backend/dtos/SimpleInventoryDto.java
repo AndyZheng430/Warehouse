@@ -1,5 +1,10 @@
 package com.skillstorm.backend.dtos;
 
+/*
+ * SimpleInventoryDto
+ * This is used in transactions for InventoryController.
+ * There is no requirement to know anything about warehouse or item besides their ids to query for them.
+ */
 public class SimpleInventoryDto {
     
     private int warehouseId;
