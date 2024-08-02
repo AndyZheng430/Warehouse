@@ -1,7 +1,7 @@
 import classes from './InventoryModal.module.css';
 import { useState } from 'react';
 
-export const InventoryModal = ({setShowModal, item}) => {
+export const InventoryModal = ({setShowModal, warehouseId, setWarehouseId, inventory, setInventory}) => {
 
   const [message, setMessage] = useState();
   const [error, setError] = useState();
@@ -15,17 +15,18 @@ export const InventoryModal = ({setShowModal, item}) => {
 
     const data = new FormData(e.target);
 
-    const itemData = {
-      name: data.get("itemName"),
-      description: data.get("itemDescription"),
-    }
-    
     e.target.reset();
 
     closeModal();
     
-    if (item) {
-      fetch(import.meta.env.VITE_EDIT_ITEMS+"/"+item?.id, {
+    if (inventory) {
+      const itemData = {
+        warehouseId: inventory.warehouseId,
+        itemId: data.get("itemId"),
+        amount: data.get("amount")
+      }
+      
+      fetch(import.meta.env.VITE_EDIT_INVENTORY+"/"+inventory?.warehouseId+"/"+inventory.item.itemId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -42,7 +43,13 @@ export const InventoryModal = ({setShowModal, item}) => {
         setError(err);
       });
     } else {
-      fetch(import.meta.env.VITE_CREATE_ITEM, {
+      const itemData = {
+        warehouseId: warehouseId,
+        itemId: data.get("itemId"),
+        amount: data.get("amount")
+      }
+
+      fetch(import.meta.env.VITE_CREATE_INVENTORY, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -58,6 +65,8 @@ export const InventoryModal = ({setShowModal, item}) => {
         console.log(err);
         setError(err);
       });
+
+      setWarehouseId();
     }
   }
 
@@ -65,19 +74,19 @@ export const InventoryModal = ({setShowModal, item}) => {
     <div className={classes.modal}>
       <div className={classes.content}>
         <div className={classes.title}>
-          <h2>Create Item</h2>
+          <h2>Create Inventory</h2>
           <span className={classes.close} onClick={closeModal}>&times;</span>
         </div>
         <hr />
         <form action="#" method="post" onSubmit={handleSubmit}>
           <div className={classes.row}> 
             <div className={classes.input}>
-              <label htmlFor="item-name">Name: </label>
-              <input type="text" id="item-name" name="itemName" value={item?.name} />
+              <label htmlFor="item-id">Item Id: </label>
+              <input type="text" id="item-id" name="itemId" defaultValue={inventory?.item?.itemId} />
             </div>
             <div className={classes.input}>
-              <label htmlFor="item-description">Owner: </label>
-              <input type="text" id="item-description" name="itemDescription" value={item?.description} />
+              <label htmlFor="inventory-amount">Amount: </label>
+              <input type="text" id="inventory-amount" name="amount" defaultValue={inventory?.amount} />
             </div>
           </div>
           <div>
@@ -89,5 +98,4 @@ export const InventoryModal = ({setShowModal, item}) => {
     </div>
 
   );
-}
 }

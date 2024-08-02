@@ -8,6 +8,7 @@ export const ItemRecord = ({item, handleDelete, handleEdit}) => {
 		<>
 			<div className={classes.record}>
 				<div className={classes.check}></div>
+				<div className={classes.id}>{item.id}</div>
 				<div className={classes.name}>{item.name}</div>
 				<div className={classes.description}>{item.description ? item.description : "No description"}</div>
 				<div className={`${classes.edit} ${classes.option}`} onClick={handleEdit}>

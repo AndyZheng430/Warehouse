@@ -5,7 +5,7 @@ import { InventoryRecord } from './InventoryRecord.jsx';
 import { MdEdit } from "react-icons/md";
 import { FaTrash, FaPlus } from "react-icons/fa";
 
-export const Record = ({warehouse, handleDelete, handleEdit}) => {
+export const Record = ({warehouse, handleDelete, handleEdit, handleDeleteInventory, setShowInventoryModal, setInventoryWarehouseId, setInventoryItem}) => {
 
 	const [showInventory, setShowInventory] = useState(false);
 
@@ -13,7 +13,15 @@ export const Record = ({warehouse, handleDelete, handleEdit}) => {
 		setShowInventory(!showInventory);
 	}
 
-	const handleCreateInventory = () => {}
+	const handleCreateInventory = () => {
+		setShowInventoryModal(true);
+		setInventoryWarehouseId(warehouse.id);
+	}
+
+	const handleEditInventory = (inventory) => {
+		setShowInventoryModal(true);
+		setInventoryItem(inventory);
+	}
 
 	return (
 		<>
@@ -40,7 +48,15 @@ export const Record = ({warehouse, handleDelete, handleEdit}) => {
 			{(showInventory && warehouse.inventory?.length > 0) && warehouse.inventory.map(
 				inventory => {
 					return (
-						<InventoryRecord key={inventory.item.itemId} name={inventory.item.name} amount={inventory.amount} />
+						<InventoryRecord 
+							key={inventory.item.itemId + " " + inventory.warehouseId} 
+							itemId={inventory.item.itemId} 
+							warehouseId={inventory.warehouseId} 
+							name={inventory.item.name} 
+							amount={inventory.amount} 
+							handleDelete={()=>handleDeleteInventory(inventory.warehouseId, inventory.item.itemId)}
+							handleEdit={()=>handleEditInventory(inventory)}
+						/>
 					);
 				}
 			)}

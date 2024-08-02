@@ -9,8 +9,8 @@
 	display: inline-block;
 }
 
-.name {
-	width: 30%;
+.name, .id {
+	width: 20%;
 	display: inline-block;
 	font-size: 18px;
 	text-align: left;
@@ -18,7 +18,7 @@
 }
 
 .description {
-	width: 50%;
+	width: 40%;
 	display: inline-block;
 	font-size: 18px;
 	text-align: left;

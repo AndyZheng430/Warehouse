@@ -1,8 +1,8 @@
 import classes from './InventoryRecord.module.css';
-import { DeleteIcon } from './icons/DeleteIcon.jsx';
-import { EditIcon } from './icons/EditIcon.jsx';
+import { MdEdit } from "react-icons/md";
+import { FaTrash } from "react-icons/fa";
 
-export const InventoryRecord = ({id, name, amount}) => {
+export const InventoryRecord = ({itemId, warehouseId, name, amount, handleDelete, handleEdit}) => {
 
 	return (
 		<>
@@ -17,9 +17,13 @@ export const InventoryRecord = ({id, name, amount}) => {
 						<div className={`${classes.data} ${classes.col4}`}>{amount}</div>
 					</div>
 				</div>
-				<div className={`${classes.col4} ${classes.controls}`}>
-					<EditIcon />
-					<DeleteIcon />
+				<div className={classes.controls}>
+					<div className={`${classes.edit} ${classes.option}`} onClick={handleEdit}>
+						<MdEdit />
+					</div>
+					<div className={`${classes.delete} ${classes.option}`} onClick={handleDelete}>
+						<FaTrash />
+					</div>
 				</div>
 			</div>
 			<hr />

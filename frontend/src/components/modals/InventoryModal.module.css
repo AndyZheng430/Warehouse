@@ -1,0 +1,64 @@
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+}
+
+.content {
+	background-color: #fefefe;
+	margin: auto;
+  margin-top: 10px;
+	padding: 20px;
+	border: 1px solid #888;
+  height: 90%;
+	width: 80%;
+}
+
+.title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title h2 {
+	padding-left: 10px;
+}
+
+.close {
+	font-size: 30px;
+	padding: 5px 20px;
+  font-weight: 500;
+  color: #999999
+}
+
+.close:hover, .close:focus {
+	cursor: pointer;
+  color: red;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 450px;
+}
+
+.input {
+  text-align: left;
+}
+
+.input label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.input input {
+  width: 100%;
+  text-align: left;
+}

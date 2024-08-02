@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skillstorm.backend.dtos.InventoryDto;
+import com.skillstorm.backend.dtos.SimpleInventoryDto;
 import com.skillstorm.backend.models.Inventory;
 import com.skillstorm.backend.services.InventoryService;
 
@@ -45,7 +45,7 @@ public class InventoryController {
     }
     
     @PostMapping("/create")
-    public ResponseEntity<Inventory> createInventory(@Valid @RequestBody InventoryDto inventoryDto) {
+    public ResponseEntity<Inventory> createInventory(@Valid @RequestBody SimpleInventoryDto inventoryDto) {
         Inventory inventory = inventoryService.save(inventoryDto);
         return ResponseEntity.ok(inventory);
     }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.skillstorm.backend.dtos.InventoryDto;
+import com.skillstorm.backend.dtos.SimpleInventoryDto;
 import com.skillstorm.backend.models.Inventory;
 import com.skillstorm.backend.models.InventoryKey;
 import com.skillstorm.backend.models.Item;
@@ -30,16 +31,18 @@ public class InventoryService {
     }
 
     @Transactional
-    public Inventory save(InventoryDto dto) {
-        Optional<Warehouse> warehouse = warehouseRepository.findById((int) dto.getWarehouseId());
-        Optional<Item> item = itemRepository.findById((int) dto.getItem().getItemId());
+    public Inventory save(SimpleInventoryDto dto) {
+        Optional<Warehouse> warehouse = warehouseRepository.findById(dto.getWarehouseId());
+        Optional<Item> item = itemRepository.findById(dto.getItemId());
+        System.out.println(warehouse.toString());
+        System.out.println(item.toString());
         if (!warehouse.isPresent()) {
             throw new RuntimeException("Warehouse not found");
         }
         if (!item.isPresent()) {
             throw new RuntimeException("Item not found");
         }
-        return inventoryRepository.save(new Inventory(dto.getWarehouseId(), dto.getItem().getItemId(), dto.getAmount(), warehouse.get(), item.get()));
+        return inventoryRepository.save(new Inventory(dto.getWarehouseId(), dto.getItemId(), dto.getAmount(), warehouse.get(), item.get()));
 
     }
 

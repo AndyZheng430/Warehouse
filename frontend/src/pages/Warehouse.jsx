@@ -3,13 +3,16 @@ import { Record } from '../components/Record.jsx';
 import { WarehouseLabel } from '../components/WarehouseLabel.jsx';
 import { Header } from '../components/Header.jsx';
 import { WarehouseModal } from '../components/modals/WarehouseModal.jsx';
+import { InventoryModal } from '../components/modals/InventoryModal.jsx';
 
 export const Warehouse = () => {
 
 	const [warehouses, setWarehouses] = useState([]);
-	const [showWarehouseModal, setShowWarehouseModal] = useState(false);
 	const [editWarehouse, setEditWarehouse] = useState();
-
+	const [inventoryWarehouseId, setInventoryWarehouseId] = useState();
+	const [inventoryItem, setInventoryItem] = useState();
+	const [showWarehouseModal, setShowWarehouseModal] = useState(false);
+	const [showInventoryModal, setShowInventoryModal] = useState(false);
 	
 	useEffect(()=> {
 		getWarehouses();
@@ -24,6 +27,18 @@ export const Warehouse = () => {
 			})
 			.catch(error => {console.log(error)});
 	}
+
+	const removeInventory = (warehouseId, itemId) => {
+		return warehouses.map(warehouse => {
+			if (warehouseId === warehouse.id) {
+				return {
+					...warehouse,
+					inventory: warehouse.inventory.filter(item => item.item.itemId === itemId)
+				}
+			}
+			return warehouse;
+		});
+	} 
 
 	const handleDelete = async (id) => {
 		fetch(import.meta.env.VITE_DELETE_WAREHOUSE+"/"+id, {
@@ -41,6 +56,21 @@ export const Warehouse = () => {
         setShowWarehouseModal(true);
 	}
 
+	const handleDeleteInventory = async (id1, id2) => {
+		console.log("Deleting Inventory");
+		fetch(import.meta.env.VITE_DELETE_INVENTORY+"/"+id1 + "/"+ id2, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(() => {
+			const newWarehouses = removeInventory(id1, id2);
+			setWarehouses(newWarehouses)
+		})
+		.catch(error => {console.log(error)});
+	}
+
 	return (
 		<>
 			<Header title="Warehouses" setShowModal={setShowWarehouseModal} />
@@ -49,10 +79,36 @@ export const Warehouse = () => {
 			<hr />
 			{warehouses && warehouses.map(
 				warehouse => (
-					<Record key={warehouse.id} warehouse={warehouse} handleDelete={() => handleDelete(warehouse.id)} handleEdit={() => handleEdit(warehouse)} />
+					<Record 
+						key={warehouse.id} 
+						warehouse={warehouse} 
+						handleDelete={() => handleDelete(warehouse.id)} 
+						handleEdit={() => handleEdit(warehouse)} 
+						handleDeleteInventory={handleDeleteInventory}
+						setShowInventoryModal={setShowInventoryModal}
+						setInventoryWarehouseId={setInventoryWarehouseId}
+						setInventoryItem={setInventoryItem}
+					/>
 				)
 			)}
-			{ showWarehouseModal && <WarehouseModal setShowModal={setShowWarehouseModal} editWarehouse={editWarehouse} setEditWarehouse={setEditWarehouse} warehouses={warehouses} setWarehouses={setWarehouses} /> }
+			{ showWarehouseModal && 
+				<WarehouseModal 
+					setShowModal={setShowWarehouseModal} 
+					editWarehouse={editWarehouse} 
+					setEditWarehouse={setEditWarehouse} 
+					warehouses={warehouses} 
+					setWarehouses={setWarehouses} 
+				/> 
+			}
+			{ showInventoryModal && 
+				<InventoryModal 
+					setShowModal={setShowInventoryModal} 
+					warehouseId={inventoryWarehouseId} 
+					setWarehouseId={setInventoryWarehouseId}
+					inventory={inventoryItem}
+					setInventory={setInventoryItem}
+				/> 
+			}
 		</>
 	);
 }
