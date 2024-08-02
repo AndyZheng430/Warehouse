@@ -8,5 +8,6 @@ import com.skillstorm.backend.models.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer>  {
     
+    // Retrieves item by name instead of id
     List<Item> findByName(String name);
 }

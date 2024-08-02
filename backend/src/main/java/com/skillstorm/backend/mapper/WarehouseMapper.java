@@ -11,6 +11,10 @@ import com.skillstorm.backend.models.Inventory;
 import com.skillstorm.backend.models.Item;
 import com.skillstorm.backend.models.Warehouse;
 
+/*
+ * WarehouseMapper
+ * Converts Warehouse Object into a non-circular referencing DTO, which can access inventory and item information.
+ */
 @Component
 public class WarehouseMapper {
     public static WarehouseDto toDTO(Warehouse warehouse) {

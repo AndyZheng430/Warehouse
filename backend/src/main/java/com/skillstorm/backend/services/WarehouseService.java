@@ -1,7 +1,6 @@
 package com.skillstorm.backend.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -39,7 +38,7 @@ public class WarehouseService {
     @Transactional
     public Warehouse update(int id, Warehouse warehouse) {
         if (!repo.existsById(id)) {
-            // throw exception and use advice to handle it
+            throw new RuntimeException("Warehouse not found");
         }
         warehouse.setId(id);
         return repo.save(warehouse);

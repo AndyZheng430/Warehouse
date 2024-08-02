@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.skillstorm.backend.dtos.InventoryDto;
 import com.skillstorm.backend.dtos.SimpleInventoryDto;
 import com.skillstorm.backend.models.Inventory;
 import com.skillstorm.backend.models.InventoryKey;
@@ -30,6 +29,7 @@ public class InventoryService {
         this.itemRepository = itemRepository;
     }
 
+    // Queries for warehouse and item information and creates new inventory object
     @Transactional
     public Inventory save(SimpleInventoryDto dto) {
         Optional<Warehouse> warehouse = warehouseRepository.findById(dto.getWarehouseId());
@@ -57,7 +57,7 @@ public class InventoryService {
     @Transactional
     public void update(int warehouseId, int itemId, Inventory inventory) {
         if (!inventoryRepository.existsById(new InventoryKey(warehouseId, itemId))) {
-            // throw exception
+            throw new RuntimeException("Inventory already exists");
         }
         inventory.setWarehouseId(warehouseId);
         inventory.setItemId(itemId);

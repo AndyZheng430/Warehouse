@@ -2,6 +2,10 @@ package com.skillstorm.backend.dtos;
 
 import java.util.List;
 
+/*
+ * WarehouseDto
+ * This is used to get warehouse, its inventory, and each inventory's item information
+ */
 public class WarehouseDto {
     private long id;
     private String name;

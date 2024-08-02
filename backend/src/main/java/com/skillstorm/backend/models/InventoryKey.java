@@ -2,6 +2,10 @@ package com.skillstorm.backend.models;
 
 import java.io.Serializable;
 
+/*
+ * InventoryKey
+ * Serves as a composite primary key for the join table, inventory
+ */
 public class InventoryKey implements Serializable {
     
     private long warehouseId;

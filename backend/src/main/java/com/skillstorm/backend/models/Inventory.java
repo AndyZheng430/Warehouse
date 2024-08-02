@@ -4,8 +4,6 @@ package com.skillstorm.backend.models;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

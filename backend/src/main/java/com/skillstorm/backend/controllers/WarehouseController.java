@@ -10,7 +10,6 @@ import com.skillstorm.backend.services.WarehouseService;
 import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

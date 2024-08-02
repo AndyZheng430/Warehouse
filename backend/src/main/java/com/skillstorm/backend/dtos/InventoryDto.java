@@ -15,8 +15,6 @@ public class InventoryDto {
         this.amount = amount;
     }
 
-
-
     public long getWarehouseId() {
         return warehouseId;
     }

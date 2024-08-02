@@ -39,7 +39,7 @@ public class ItemService {
     @Transactional
     public Item update(int id, Item item) {
         if (!repo.existsById(id)) {
-            // throw exception
+            throw new RuntimeException("Item not found");
         }
         item.setId(id);
         return repo.save(item);
