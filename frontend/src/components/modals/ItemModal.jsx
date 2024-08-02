@@ -1,7 +1,7 @@
-import classes from './InventoryModal.module.css';
+import classes from './ItemModal.module.css';
 import { useState } from 'react';
 
-export const InventoryModal = ({setShowModal, item}) => {
+export const ItemModal = ({setShowModal, editItem, setEditItem, items, setItems}) => {
 
   const [message, setMessage] = useState();
   const [error, setError] = useState();
@@ -24,8 +24,8 @@ export const InventoryModal = ({setShowModal, item}) => {
 
     closeModal();
     
-    if (item) {
-      fetch(import.meta.env.VITE_EDIT_ITEMS+"/"+item?.id, {
+    if (editItem) {
+      fetch(import.meta.env.VITE_EDIT_ITEM+"/"+editItem?.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -33,14 +33,16 @@ export const InventoryModal = ({setShowModal, item}) => {
         body: JSON.stringify(itemData)
       })
       .then(data => data.json())
-      .then((returnedData) => {
-        console.log(returnedData);
-        setMessage("Succesfully updated Item " + returnedData?.name);
+      .then((returnedData) =>{ 
+        const newItems = items?.map(item => item.id === editItem.id ? returnedData : item);
+        setItems(newItems);
+        setEditItem();
+        setMessage("Succesfully updated Item " + editItem.id);
       })
       .catch(err => {
-        console.log(err);
         setError(err);
       });
+      
     } else {
       fetch(import.meta.env.VITE_CREATE_ITEM, {
         method: "POST",
@@ -51,6 +53,7 @@ export const InventoryModal = ({setShowModal, item}) => {
       })
       .then(data => data.json())
       .then((returnedData) => {
+        setItems([...items, returnedData]);
         console.log(returnedData);
         setMessage("Succesfully created new Item " + returnedData?.name);
       })
@@ -73,12 +76,14 @@ export const InventoryModal = ({setShowModal, item}) => {
           <div className={classes.row}> 
             <div className={classes.input}>
               <label htmlFor="item-name">Name: </label>
-              <input type="text" id="item-name" name="itemName" value={item?.name} />
+              <input type="text" id="item-name" name="itemName" defaultValue={editItem?.name} />
             </div>
             <div className={classes.input}>
-              <label htmlFor="item-description">Owner: </label>
-              <input type="text" id="item-description" name="itemDescription" value={item?.description} />
+              <label htmlFor="item-description">Description: </label>
+              <input type="text" id="item-description" name="itemDescription" defaultValue={editItem?.description} />
             </div>
+            <div className={classes.input}></div>
+            <div className={classes.input}></div>
           </div>
           <div>
             <hr />
@@ -89,5 +94,4 @@ export const InventoryModal = ({setShowModal, item}) => {
     </div>
 
   );
-}
 }

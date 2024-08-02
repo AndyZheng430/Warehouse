@@ -1,7 +1,7 @@
 import classes from './WarehouseModal.module.css';
 import { useState } from 'react';
 
-export const WarehouseModal = ({setShowModal, warehouse}) => {
+export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, warehouses, setWarehouses}) => {
 
   const [message, setMessage] = useState();
   const [error, setError] = useState();
@@ -53,6 +53,7 @@ export const WarehouseModal = ({setShowModal, warehouse}) => {
       })
       .then(data => data.json())
       .then((returnedData) => {
+        setWarehouses([...warehouses, returnedData]);
         console.log(returnedData);
         setMessage("Succesfully created new Warehouse " + returnedData?.name);
       })

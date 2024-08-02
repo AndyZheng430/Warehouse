@@ -14,8 +14,6 @@ export const Record = ({warehouse, handleDelete, handleEdit}) => {
 	}
 
 	const handleCreateInventory = () => {}
-	
-	// console.log(warehouse);
 
 	return (
 		<>

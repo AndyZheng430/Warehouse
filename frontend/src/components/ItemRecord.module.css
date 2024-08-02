@@ -5,12 +5,20 @@
 }
 
 .check {
-	width: 4%;
+	width: 5%;
 	display: inline-block;
 }
 
-.col {
-	width: 20%;
+.name {
+	width: 30%;
+	display: inline-block;
+	font-size: 18px;
+	text-align: left;
+    font-weight: 600;
+}
+
+.description {
+	width: 50%;
 	display: inline-block;
 	font-size: 18px;
 	text-align: left;
@@ -19,18 +27,8 @@
 
 .option {
     height: 100%;
-	width: 4%;
+	width: 5%;
 	display: inline-block;
-}
-
-.add {
-    height: 100%;
-    color: #00744a;
-    font-size: 18px;
-}
-
-.add:hover {
-    cursor: pointer;
 }
 
 .edit {
@@ -50,15 +48,5 @@
 }
 
 .delete:hover {
-    cursor: pointer;
-}
-
-.display {
-    height: 100%;
-    color: #201E43;
-    font-size: 18px;
-}
-
-.display:hover {
     cursor: pointer;
 }
