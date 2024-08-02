@@ -26,8 +26,8 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
 
     closeModal();
     
-    if (warehouse) {
-      fetch(import.meta.env.VITE_EDIT_WAREHOUSE+"/"+warehouse?.id, {
+    if (editWarehouse) {
+      fetch(import.meta.env.VITE_EDIT_WAREHOUSE+"/"+editWarehouse?.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -36,7 +36,9 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
       })
       .then(data => data.json())
       .then((returnedData) => {
-        console.log(returnedData);
+        const newWarehouses = warehouses?.map(warehouse => warehouse.id === editWarehouse.id ? returnedData : warehouse);
+        setWarehouses(newWarehouses);
+        setEditWarehouse();
         setMessage("Succesfully updated Warehouse " + returnedData?.name);
       })
       .catch(err => {
@@ -55,7 +57,7 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
       .then((returnedData) => {
         setWarehouses([...warehouses, returnedData]);
         console.log(returnedData);
-        setMessage("Succesfully created new Warehouse " + returnedData?.name);
+        setMessage("Succesfully created new Warehouse " + returnedData?.id);
       })
       .catch(err => {
         console.log(err);
@@ -76,19 +78,19 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
           <div className={classes.row}> 
             <div className={classes.input}>
               <label htmlFor="warehouse-name">Name: </label>
-              <input type="text" id="warehouse-name" name="warehouseName" value={warehouse?.name} />
+              <input type="text" id="warehouse-name" name="warehouseName" defaultValue={editWarehouse?.name} />
             </div>
             <div className={classes.input}>
               <label htmlFor="warehouse-owner">Owner: </label>
-              <input type="text" id="warehouse-owner" name="warehouseOwner" value={warehouse?.owner} />
+              <input type="text" id="warehouse-owner" name="warehouseOwner" defaultValue={editWarehouse?.owner} />
             </div>
             <div className={classes.input}>
               <label htmlFor="warehouse-location">Location: </label>
-              <input type="text" id="warehouse-location" name="warehouseLocation" value={warehouse?.location} />
+              <input type="text" id="warehouse-location" name="warehouseLocation" defaultValue={editWarehouse?.location} />
             </div>
             <div className={classes.input}>
               <label htmlFor="warehouse-capacity">Maximum Capacity: </label>
-              <input type="number" id="warehouse-capacity" name="warehouseCapacity" value={warehouse?.maxCapacity} />
+              <input type="number" id="warehouse-capacity" name="warehouseCapacity" defaultValue={editWarehouse?.maxCapacity} />
             </div>
           </div>
           <div>

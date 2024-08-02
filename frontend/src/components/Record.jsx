@@ -22,7 +22,7 @@ export const Record = ({warehouse, handleDelete, handleEdit}) => {
 				<div className={classes.col}>{warehouse.name}</div>
 				<div className={classes.col}>{warehouse.owner}</div>
 				<div className={classes.col}>{warehouse.location}</div>
-				<div className={classes.col}>{warehouse.capacity}</div>
+				<div className={classes.col}>{warehouse.maxCapacity}</div>
 				<div className={`${classes.add} ${classes.option}`} onClick={handleCreateInventory}>
 					<FaPlus />
 				</div>

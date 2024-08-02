@@ -37,12 +37,12 @@ public class WarehouseService {
     }
 
     @Transactional
-    public void update(int id, Warehouse warehouse) {
+    public Warehouse update(int id, Warehouse warehouse) {
         if (!repo.existsById(id)) {
             // throw exception and use advice to handle it
         }
         warehouse.setId(id);
-        repo.save(warehouse);
+        return repo.save(warehouse);
     }
 
     @Transactional

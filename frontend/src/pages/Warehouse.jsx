@@ -10,7 +10,6 @@ export const Warehouse = () => {
 	const [showWarehouseModal, setShowWarehouseModal] = useState(false);
 	const [editWarehouse, setEditWarehouse] = useState();
 
-	console.log(import.meta.env.VITE_GET_WAREHOUSES);
 	
 	useEffect(()=> {
 		getWarehouses();
@@ -21,6 +20,7 @@ export const Warehouse = () => {
 			.then(response => response.json())
 			.then(data => {
 				setWarehouses(data);
+				console.log(data);
 			})
 			.catch(error => {console.log(error)});
 	}
@@ -36,8 +36,9 @@ export const Warehouse = () => {
 		.catch(error => {console.log(error)});
 	}
 
-	function handleEdit(id) {
-		console.log(id);
+	const handleEdit = (warehouse) => {
+		setEditWarehouse(warehouse);
+        setShowWarehouseModal(true);
 	}
 
 	return (
@@ -48,10 +49,10 @@ export const Warehouse = () => {
 			<hr />
 			{warehouses && warehouses.map(
 				warehouse => (
-					<Record key={warehouse.id} editWarehouse={editWarehouse} setEditWarehouse={setEditWarehouse} handleDelete={() => handleDelete(warehouse.id)} handleEdit={() => handleEdit(warehouse.id)} />
+					<Record key={warehouse.id} warehouse={warehouse} handleDelete={() => handleDelete(warehouse.id)} handleEdit={() => handleEdit(warehouse)} />
 				)
 			)}
-			{ showWarehouseModal && <WarehouseModal setShowModal={setShowWarehouseModal} warehouses={warehouses} setWarehouses={setWarehouses} /> }
+			{ showWarehouseModal && <WarehouseModal setShowModal={setShowWarehouseModal} editWarehouse={editWarehouse} setEditWarehouse={setEditWarehouse} warehouses={warehouses} setWarehouses={setWarehouses} /> }
 		</>
 	);
 }

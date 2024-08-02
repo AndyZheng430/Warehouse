@@ -52,8 +52,8 @@ public class WarehouseController {
     }
 
     @PutMapping("edit/{id}")
-    public void updateWarehouse(@PathVariable int id, @RequestBody Warehouse warehouse) {
-        warehouseService.update(id, warehouse);
+    public Warehouse updateWarehouse(@PathVariable int id, @RequestBody Warehouse warehouse) {
+        return warehouseService.update(id, warehouse);
     }
     
     @DeleteMapping("/delete/{id}")
