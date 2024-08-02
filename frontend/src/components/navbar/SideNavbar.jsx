@@ -17,7 +17,7 @@ export const SideNavbar = ({collapse, setCollapse}) => {
           <HiBars3 onClick={toggleNavbar} /> 
           : 
           <>
-            <span>RPG Factory</span> 
+            <span>RPG Warehouse</span> 
             <HiBars3BottomRight onClick={toggleNavbar} />
           </>}
       </div>
