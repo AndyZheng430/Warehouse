@@ -20,12 +20,14 @@ export const InventoryModal = ({setShowModal, warehouseId, setWarehouseId, inven
     closeModal();
     
     if (inventory) {
+      // sets up inventory object
       const itemData = {
         warehouseId: inventory.warehouseId,
         itemId: data.get("itemId"),
         amount: data.get("amount")
       }
-      
+
+      // send put request to edit inventory
       fetch(import.meta.env.VITE_EDIT_INVENTORY+"/"+inventory?.warehouseId+"/"+inventory.item.itemId, {
         method: "PUT",
         headers: {
@@ -43,12 +45,14 @@ export const InventoryModal = ({setShowModal, warehouseId, setWarehouseId, inven
         setError(err);
       });
     } else {
+      // sets up inventory object
       const itemData = {
         warehouseId: warehouseId,
         itemId: data.get("itemId"),
         amount: data.get("amount")
       }
 
+      // send post request to create new inventory
       fetch(import.meta.env.VITE_CREATE_INVENTORY, {
         method: "POST",
         headers: {

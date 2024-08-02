@@ -9,15 +9,18 @@ export const Record = ({warehouse, handleDelete, handleEdit, handleDeleteInvento
 
 	const [showInventory, setShowInventory] = useState(false);
 
+	// toggles display inventory information
 	const toggleInventory = () => {
 		setShowInventory(!showInventory);
 	}
 
+	// display Modal UI to create inventory
 	const handleCreateInventory = () => {
 		setShowInventoryModal(true);
 		setInventoryWarehouseId(warehouse.id);
 	}
 
+	// display Modal UI to edit inventory
 	const handleEditInventory = (inventory) => {
 		setShowInventoryModal(true);
 		setInventoryItem(inventory);

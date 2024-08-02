@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 3.2em;
+  font-weight: bold;
+  margin-left: 5%;
+}
+
+.create {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 5%;
+}
+
+.create button {
+  border: 2px solid #04AA6D;
+  background-color: white;
+  color: #04AA6D;
+  font-weight: 500;
+}
+
+.create button:hover {
+  border: 2px solid #04AA6D;
+  background-color: #04AA6D;
+  color: white;
+  font-weight: 500;
+}

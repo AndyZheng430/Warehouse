@@ -1,25 +1,25 @@
 .container {
-    display: flex;
+  display: flex;
 }
 
 .details{
-    flex: 3;
+  flex: 3;
 }
 
 
 .controls {
-    flex: 1;
+  flex: 1;
 }
 
 .controls svg {
-    margin-top: 16px;
-    margin-left: 5px;
-    margin-right: 5px;
+  margin-top: 16px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .label {
-    color: #508C9B;
-    font-weight: 500;
+  color: #508C9B;
+  font-weight: 500;
 }
 
 .data {
