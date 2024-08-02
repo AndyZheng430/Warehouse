@@ -4,8 +4,10 @@ package com.skillstorm.backend.models;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,21 +34,17 @@ public class Inventory {
     @Column(name = "amount")
     private long amount;
 
-    // @ManyToOne(fetch = FetchType.LAZY, targetEntity = Item.class)
-    // @JoinColumn(name = "item_id", nullable = false, insertable = false, updatable = false)
-    @ManyToOne()
+    @ManyToOne(targetEntity = Item.class)
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "item_id")
-    @JsonIdentityReference(alwaysAsId= true)
+    @JoinColumn(name = "item_id", nullable = false, insertable = false, updatable = false)
+    @JsonManagedReference
     @JsonIgnore
     private Item item;
 
-    // @ManyToOne(fetch = FetchType.LAZY, targetEntity = Warehouse.class)
-    // @JoinColumn(name = "warehouse_id", nullable = false, insertable = false, updatable = false)
-    @ManyToOne()
+    @ManyToOne(targetEntity = Warehouse.class)
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "warehouse_id")
-    @JsonIdentityReference(alwaysAsId= true)
+    @JoinColumn(name = "warehouse_id", nullable = false, insertable = false, updatable = false)
+    @JsonManagedReference
     @JsonIgnore
     private Warehouse warehouse; 
 

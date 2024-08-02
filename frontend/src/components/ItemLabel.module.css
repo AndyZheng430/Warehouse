@@ -1,0 +1,31 @@
+.container {
+	width: 100%;
+}
+
+.label {
+	font-weight: 450;
+}
+
+.name, .id {
+	width: 20%;
+	display: inline-block;
+	font-size: 18px;
+	text-align: left;
+}
+
+.description {
+	width: 40%;
+	display: inline-block;
+	font-size: 18px;
+	text-align: left;
+}
+
+.check {
+	width: 5%;
+	display: inline-block;
+}
+
+.option {
+	width: 5%;
+	display: inline-block;
+}

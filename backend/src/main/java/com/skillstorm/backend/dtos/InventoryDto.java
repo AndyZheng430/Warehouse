@@ -2,42 +2,43 @@ package com.skillstorm.backend.dtos;
 
 public class InventoryDto {
     
-    private int warehouseId;
-    private int itemId;
-    private int amount;
+    private long warehouseId;
+    private long amount;
+    private ItemDto item;
 
     public InventoryDto() {
     }
 
-    public InventoryDto(int warehouseId, int itemId, int amount) {
+    public InventoryDto(long warehouseId, ItemDto item, long amount) {
         this.warehouseId = warehouseId;
-        this.itemId = itemId;
+        this.item = item;
         this.amount = amount;
     }
 
-    public int getWarehouseId() {
+
+
+    public long getWarehouseId() {
         return warehouseId;
     }
 
-    public void setWarehouseId(int warehouseId) {
+    public void setWarehouseId(long warehouseId) {
         this.warehouseId = warehouseId;
     }
 
-    public int getItemId() {
-        return itemId;
+    public ItemDto getItem() {
+        return item;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setItem(ItemDto item) {
+        this.item = item;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 
-    
 }

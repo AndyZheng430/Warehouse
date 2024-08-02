@@ -37,12 +37,12 @@ public class ItemService {
     }
 
     @Transactional
-    public void update(int id, Item item) {
+    public Item update(int id, Item item) {
         if (!repo.existsById(id)) {
             // throw exception
         }
         item.setId(id);
-        repo.save(item);
+        return repo.save(item);
     }
 
     @Transactional

@@ -1,0 +1,52 @@
+.record {
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+}
+
+.check {
+	width: 5%;
+	display: inline-block;
+}
+
+.name, .id {
+	width: 20%;
+	display: inline-block;
+	font-size: 18px;
+	text-align: left;
+    font-weight: 600;
+}
+
+.description {
+	width: 40%;
+	display: inline-block;
+	font-size: 18px;
+	text-align: left;
+    font-weight: 600;
+}
+
+.option {
+    height: 100%;
+	width: 5%;
+	display: inline-block;
+}
+
+.edit {
+    height: 100%;
+    color: #134B70;
+    font-size: 18px;
+}
+
+.edit:hover {
+    cursor: pointer;
+}
+
+.delete {
+    height: 100%;
+    color: #920000;
+    font-size: 18px;
+}
+
+.delete:hover {
+    cursor: pointer;
+}

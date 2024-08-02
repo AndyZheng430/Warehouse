@@ -3,6 +3,7 @@ package com.skillstorm.backend.models;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,16 +32,16 @@ public class Warehouse {
     private String owner;
 
     @Min(0)
-    private int maxCapacity;
+    private long maxCapacity;
 
     @OneToMany(mappedBy = "warehouse", targetEntity = Inventory.class)
     @JsonBackReference
-    private List<Inventory> storages;
+    private List<Inventory> inventories;
     
     public Warehouse() {
     }
 
-    public Warehouse(long id, String name, String location, String owner, @Min(0) int maxCapacity) {
+    public Warehouse(long id, String name, String location, String owner, @Min(0) long maxCapacity) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -80,20 +81,20 @@ public class Warehouse {
         this.owner = owner;
     }
 
-    public int getMaxCapacity() {
+    public long getMaxCapacity() {
         return maxCapacity;
     }
 
-    public void setMaxCapacity(int maxCapacity) {
+    public void setMaxCapacity(long maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
 
-    public List<Inventory> getStorage() {
-        return storages;
+    public List<Inventory> getInventories() {
+        return inventories;
     }
 
-    public void setStorage(List<Inventory> storages) {
-        this.storages = storages;
+    public void setInventories(List<Inventory> inventories) {
+        this.inventories = inventories;
     }
 
     @Override
