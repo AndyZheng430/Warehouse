@@ -16,7 +16,7 @@ public class ItemsPage {
     //private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
 
     //local
-    private static final String url = "http://localhost:4173/items";
+    private static final String url = "http://localhost:5173/items";
     //Creating webelements for elements on the Items page that I will need to access.
 
     @FindBy(className = "_title_1avss_15")

@@ -23,7 +23,7 @@ public class WarehousePage {
     //private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
 
     //local
-    private static final String url = "http://localhost:4173/warehouses";
+    private static final String url = "http://localhost:5173/warehouses";
 
     //creating webelements from elements on the warehouse page to be interacted with later
     @FindBy(className = "_title_1avss_15")
@@ -78,9 +78,17 @@ public class WarehousePage {
         PageFactory.initElements(driver, this);
     }
 
+
     //check to see if we have any warehouses existing
     public List<WebElement> getWarehouses(){
         return allWarehouses;
+    }
+    public boolean setWarehouses(String name, String owner, String location, String capacity){
+        warehouseNameField.sendKeys(name);
+        warehouseOwnerField.sendKeys(owner);
+        warehouseLocationField.sendKeys(location);
+        warehouseCapacityField.sendKeys(capacity);
+        return true;
     }
     public boolean warehousesExist(){
         return allWarehouses.size() > 0;

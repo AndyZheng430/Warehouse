@@ -43,12 +43,16 @@ public class UpdateInventorySteps {
         this.driver = new ChromeDriver(options);
         this.warehousePage = new WarehousePage( this.driver);
     }
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
-    /*
-     * =================
-     * BACKGROUND
-     * =================
-     */
+
+    
+    //================= BACKGROUND =================
     @Given("I am on {string} page")
     public void i_am_on_the_warehouses_page(String string) {
         
@@ -66,9 +70,7 @@ public class UpdateInventorySteps {
 
         assertTrue(warehousePage.findWarehouse(name, location, owner, capacity));
     }
-    //===========================
-    //Scenario 1
-    //===========================
+    //================= SCENARIO 1 =================
     @Given("I click the inventory item")
     public void i_click_to_edit_an_item() {
         WebElement row = driver.findElement(By.className("inventory-1-1"));
@@ -133,7 +135,7 @@ public class UpdateInventorySteps {
     ///////////////////////////////////////////////////////////////////////////////////////////
     /*
      * 
-     * SECOND SCENARIO
+     * Third SCENARIO
      * 
      */
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -178,11 +180,5 @@ public class UpdateInventorySteps {
     //     // Check that the inventory item has not been updated (implementation depends on your application's behavior)
     // }
 
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
 }

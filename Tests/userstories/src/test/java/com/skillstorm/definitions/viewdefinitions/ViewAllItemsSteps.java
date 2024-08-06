@@ -23,7 +23,6 @@ import static org.testng.Assert.assertFalse;
 
 import com.skillstorm.helper.ResetDB;
 import com.skillstorm.pages.ItemsPage;
-import com.skillstorm.pages.WarehousePage;
 
 public class ViewAllItemsSteps {
     WebDriver driver;

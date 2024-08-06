@@ -1,4 +1,4 @@
-@testing
+
 Feature: Update Inventory
   As a user,  
   I want to be able to edit the Inventory 

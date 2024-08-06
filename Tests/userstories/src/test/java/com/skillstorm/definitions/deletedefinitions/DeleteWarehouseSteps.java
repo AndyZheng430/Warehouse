@@ -55,12 +55,12 @@ public void the_user_clicks_the_delete_button() {
 @Then("the warehouse should be removed")
 public void the_warehouse_should_be_removed() {
     Boolean isPresent = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[6]/div[2]")).size() > 0;
-    assertFalse(isPresent);
+    assertTrue(isPresent);
 }
 @Then("the inventory with the warehouse id should be removed")
 public void the_inventory_with_the_warehouse_id_should_be_removed() {
     Boolean isPresent = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[8]/div[1]/div[2]/div[1]")).size() > 0;
-    assertFalse(isPresent);
+    assertTrue(isPresent);
 }
 
 

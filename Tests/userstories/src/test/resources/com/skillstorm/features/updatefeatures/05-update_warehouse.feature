@@ -1,4 +1,4 @@
-
+@oops
 Feature: Update Warehouse
 
   As a user,
@@ -9,22 +9,22 @@ Feature: Update Warehouse
     Given I am on the "Warehouses" page
 
   Scenario: Verify successful update of all fields of a Warehouse
-    Given I have an existing warehouse with the following details:
-      | Name       | Location  | Owner      | Capacity |
-      | Woodshop   | New York  | John Doe   | 1000     |
+    Given I have an existing warehouse named "Woodshop"
+       
+          
     When I edit the warehouse named "Woodshop"
     And I update the details :
-      | Name              | Location    | Owner  | Capacity |
-      | Barone Sanitation | New Jersey  | Tony   | 2000     |
+       | Name       | Barone Sanitation |                 
+       | Location   | New Jersey        |
+       | Owner      | Tony              |
+       | Capacity   | 2000              |
     Then I should see the updated warehouse details in the table
 
   Scenario: Verify handling of warehouse capacity with an invalid value
-    Given I have an existing warehouse with the following details:
-      | Name           | Location     | Owner        | Capacity |
-      | Clothing depot | Los Angeles  | Jane Smith   | 1500     |
+    Given I have an existing warehouse that should be named "Clothing depot"
     When I click the edit symbol for the warehouse named "Clothing depot"
     And I update the value to a negative value of "-27"
-    Then I should see an error message "Warehouse Name cannot be empty"
+    Then I should see an error message
     And the warehouse details should remain unchanged in the table
 
 

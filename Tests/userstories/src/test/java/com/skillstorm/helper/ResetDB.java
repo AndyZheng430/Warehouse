@@ -13,7 +13,7 @@ public class ResetDB {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             
 
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "application/json");
             
             // get response

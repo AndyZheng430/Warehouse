@@ -1,3 +1,4 @@
+@deleting
 Feature: Delete an item
 
     As a user,

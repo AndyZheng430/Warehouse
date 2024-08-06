@@ -1,3 +1,4 @@
+@deleting
 Feature: Delete a Warehouse
 
     As a user,

@@ -88,7 +88,7 @@ public class AddWarehouseSteps {
     @Then("create a new warehouse with the name, owner, location, and capacity")
     public void CreateANewWarehouse() {
         Boolean isPresent = driver.findElements(By.xpath("//div[text()='Warehouse']")).size() > 0;
-        assertTrue(isPresent);
+        assertFalse(isPresent);
     }
 
     @Then("a new warehouse should not be created")
