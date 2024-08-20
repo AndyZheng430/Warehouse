@@ -11,6 +11,7 @@ function App() {
     <>
       <main>
         <BrowserRouter>
+
           <SideNavbar collapse={collapse} setCollapse={setCollapse} />
           <div className={collapse ? "content-minimize" : "content-maximize"} >
             <Routes>
