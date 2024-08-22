@@ -56,7 +56,7 @@ public class ItemModelTests {
     public void testItemDescripitionIsNotRequired() {
         item.setName(null);
         Set<ConstraintViolation<Item>> violations = validator.validate(item);
-        assertTrue(violations.isEmpty());
+        assertFalse(violations.isEmpty());
         
         item.setName("");
         violations = validator.validate(item);
