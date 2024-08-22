@@ -28,3 +28,8 @@ Feature: create new Inventory
         And does not enter an item id
         Then the new inventory should not be created
         And an error saying that an item id is required
+
+    Scenario: View new inventory
+        Given a new inventory is successfully created
+        When the user clicks the detail arrow button 
+        Then the new inventory details should be displayed
