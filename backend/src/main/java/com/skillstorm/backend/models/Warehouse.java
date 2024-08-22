@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "warehouse")
@@ -22,6 +23,7 @@ public class Warehouse {
     private long id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column
