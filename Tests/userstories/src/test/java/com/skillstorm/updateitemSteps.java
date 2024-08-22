@@ -16,6 +16,8 @@ import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class updateitemSteps {
     
@@ -64,19 +66,20 @@ public class updateitemSteps {
     public void i_expand_the_details_for_warehouse(String warehouseName) {
 
         String string = String.format("//div[contains(text(),'%s')]", warehouseName);
-        try{WebElement findName = driver.findElement(By.xpath(string));}
+        try{
+            WebElement Name = driver.findElement(By.xpath(string));
+        }
         catch(Exception NoSuchElementException){}
         
         WebElement expandButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("._display_9ratk_111")));
         expandButton.click();
-        WebElement expandEditButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("._option_do5oz_77")));
-        expandEditButton.click();
+
     }
 
     @And("I click to edit item named {string}")
     public void i_click_to_edit_item_named(String itemName) {
-        WebElement editButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='" + itemName + "']/following-sibling::button")));
-        editButton.click();
+        WebElement expandEditButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("._option_do5oz_77")));
+        expandEditButton.click();
     }
 
     @When("I change the inventory item Id to {string}")
@@ -127,4 +130,6 @@ public class updateitemSteps {
     public void the_inventory_item_should_not_be_updated() {
         // Check that the inventory item has not been updated (implementation depends on your application's behavior)
     }
+
+
 }
