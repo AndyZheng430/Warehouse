@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "item")
@@ -21,13 +22,13 @@ public class Item {
     private long id;
     
     @Column
+    @NotNull
     private String name;
 
     @Column
     private String description;
 
     @OneToMany(mappedBy = "item", targetEntity = Inventory.class)
-    // @JsonManagedReference
     @JsonBackReference
     private List<Inventory> inventories;
 

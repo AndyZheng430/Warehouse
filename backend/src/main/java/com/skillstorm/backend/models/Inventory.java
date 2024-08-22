@@ -14,6 +14,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 
 
 @Entity
@@ -30,6 +31,7 @@ public class Inventory {
     private long itemId;
 
     @Column(name = "amount")
+    @Min(0)
     private long amount;
 
     @ManyToOne(targetEntity = Item.class)
@@ -48,6 +50,12 @@ public class Inventory {
 
     public Inventory() {
     }
+
+    // public Inventory(long warehouseId, long itemId, long amount) {
+    //     this.warehouseId = warehouseId;
+    //     this.itemId = itemId;
+    //     this.amount = amount;
+    // }
 
     public Inventory(long warehouseId, long itemId, long amount, Warehouse warehouse, Item item) {
         this.warehouseId = warehouseId;
