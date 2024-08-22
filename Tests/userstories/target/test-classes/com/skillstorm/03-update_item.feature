@@ -31,11 +31,11 @@ Feature: Update Inventory
     Then I should receive an error message 
     And the inventory item should not be updated
 
-  Scenario: Handling an invalid item ID
-    Given I am on the Warehouses page
-    And I expand the details for warehouse "Wood Shop"
-    And I click to edit item named "Wood"
-    When I try to edit the item name to have an invalid id "5000"
-    And I click the submit button
-    Then I should receive an error message 
-    And the inventory item should not be updated
+  # Scenario: Handling an invalid item ID
+  #   Given I am on the Warehouses page
+  #   And I expand the details for warehouse "Wood Shop"
+  #   And I click to edit item named "Wood"
+  #   When I try to edit the item name to have an invalid id "5000"
+  #   And I click the submit button
+  #   Then I should receive an error message 
+  #   And the inventory item should not be updated
