@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-6ee38085-a083-48b3-9b86-95cb07bc65b4"
+           tests="5"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.275">
+    <properties></properties>
+
+
+
+            <testcase
+                name="createWarehouse"
+                time="0.257"
+                classname="com.skillstorm.backend.WarehouseControllerTests">
+            </testcase>
+            <testcase
+                name="getAllWarehouses"
+                time="0.003"
+                classname="com.skillstorm.backend.WarehouseControllerTests">
+            </testcase>
+            <testcase
+                name="getWarehouseById"
+                time="0.002"
+                classname="com.skillstorm.backend.WarehouseControllerTests">
+            </testcase>
+            <testcase
+                name="deleteWarehouse"
+                time="0.001"
+                classname="com.skillstorm.backend.WarehouseControllerTests">
+            </testcase>
+            <testcase
+                name="editWarehouse"
+                time="0.012"
+                classname="com.skillstorm.backend.WarehouseControllerTests">
+            </testcase>
+</testsuite>
