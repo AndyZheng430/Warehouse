@@ -1,4 +1,4 @@
-package com.skillstorm;
+package com.skillstorm.definitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
@@ -16,10 +16,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import dev.failsafe.internal.util.Assert;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
 import java.util.List;
+
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
 public class ViewAllWarehousesSteps {
 

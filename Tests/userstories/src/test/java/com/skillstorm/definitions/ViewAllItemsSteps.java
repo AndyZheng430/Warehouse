@@ -1,4 +1,4 @@
-package com.skillstorm;
+package com.skillstorm.definitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -6,9 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import java.util.List;
@@ -20,6 +17,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
 public class ViewAllItemsSteps {
     WebDriver itemDriver;
