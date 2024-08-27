@@ -7,9 +7,9 @@ pipeline {
                 sh "echo Building frontend"
                 sh "cd frontend && npm install && npm run build"
                 sh "pwd"
-                sh "ls -al"
                 withSonarQubeEnv('SonarCloud') {
-                    sh '''
+                    sh ''' 
+                    cd frontend &&
                     npx sonar-scanner \
                     -Dsonar.projectKey=andyzheng430_warehouse-frontend \
                     -Dsonar.projectName=warehouse-frontend \
@@ -40,6 +40,7 @@ pipeline {
                 sh "cd backend && mvn clean install && ls target/"
                 withSonarQubeEnv('SonarCloud') {
                 sh '''
+                    cd backend &&
                      mvn sonar:sonar \
                      -Dsonar.projectKey=AndyZheng430_Warehouse \
                      -Dsonar.projectName=Warehouse_Backend \
