@@ -5,7 +5,8 @@ pipeline {
         stage('Build Frontend'){
             steps{
                 sh "echo Building frontend"
-                sh "cd frontend && echo pwd && npm install && npm run build"
+                sh "cd frontend && npm install && npm run build"
+                sh "pwd"
                 withSonarQubeEnv('SonarCloud') {
                     sh '''
                     npx sonar-scanner \
