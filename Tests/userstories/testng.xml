@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test  name="Cucumber with TestNG Test">
+<suite name="CRUD user stories">
+  <test  name="View">
     <classes>
-      <class name="com.skillstorm.runner.CucumberRunnerTests"/>
+      <class name="com.skillstorm.runner.ViewRunner"/>
     </classes>
   </test> <!-- Test -->
+
+    <test  name="Update">
+    <classes>
+      <class name="com.skillstorm.runner.UpdateRunner"/>
+    </classes>
+  </test> 
+
+  <test  name="Delete">
+    <classes>
+      <class name="com.skillstorm.runner.DeleteRunner"/>
+    </classes>
+  </test> 
+
 </suite> <!-- Suite -->
