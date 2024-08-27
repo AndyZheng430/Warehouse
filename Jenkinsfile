@@ -7,6 +7,7 @@ pipeline {
                 sh "echo Building frontend"
                 sh "cd frontend && npm install && npm run build"
                 sh "pwd"
+                sh "ls -al"
                 withSonarQubeEnv('SonarCloud') {
                     sh '''
                     npx sonar-scanner \
