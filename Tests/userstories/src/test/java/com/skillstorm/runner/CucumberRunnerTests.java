@@ -5,7 +5,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 
-@CucumberOptions(tags = "", features = {"src/test/resources/com/skillstorm/features"}, glue = {"com.skillstorm.stepdefinitions"},
+@CucumberOptions(tags = "", features = {"src/test/resources/com/skillstorm/features"}, glue = {"com.skillstorm.definitions"},
                  plugin = {})
 public class CucumberRunnerTests extends AbstractTestNGCucumberTests {
     
