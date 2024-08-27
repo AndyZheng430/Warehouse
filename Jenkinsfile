@@ -5,14 +5,14 @@ pipeline {
         stage('Build Frontend'){
             steps{
                 sh "echo Building frontend"
-                sh "cd frontend && npm install && npm run build"
+                sh "cd frontend && echo pwd && npm install && npm run build"
                 withSonarQubeEnv('SonarCloud') {
                     sh '''
                     npx sonar-scanner \
                     -Dsonar.projectKey=andyzheng430_warehouse-frontend \
                     -Dsonar.projectName=warehouse-frontend \
                     -Dsonar.sources=src \
-                    -Dsonar.exclusions=**/__tests__/**,src/test/** \
+                    -Dsonar.exclusions=**/__tests__/**\
                     -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
                     '''
                 }
