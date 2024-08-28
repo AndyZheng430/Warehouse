@@ -35,29 +35,29 @@ public class InventoryController {
     }
 
     @GetMapping()
-    public List<Inventory> getAll() {
-        return inventoryService.findAll();
+    public ResponseEntity<List<Inventory>> getAll() {
+        return ResponseEntity.ok(inventoryService.findAll());
     }
     
     @GetMapping("/{warehouseId}/{itemId}")
-    public Optional<Inventory> getInventoryById(@PathVariable int warehouseId, @PathVariable int itemId) {
-        return inventoryService.findById(warehouseId, itemId);
+    public ResponseEntity<Optional<Inventory>> getInventoryById(@PathVariable int warehouseId, @PathVariable int itemId) {
+        return ResponseEntity.ok(inventoryService.findById(warehouseId, itemId));
     }
     
     @PostMapping("/create")
     public ResponseEntity<Inventory> createInventory(@Valid @RequestBody SimpleInventoryDto inventoryDto) {
         Inventory inventory = inventoryService.save(inventoryDto);
-        return ResponseEntity.ok(inventory);
+        return ResponseEntity.status(HttpStatus.CREATED).body(inventory);
     }
     
     @PutMapping("edit/{warehouseId}/{itemId}")
-    public void putMethodName(@PathVariable int warehouseId, @PathVariable int itemId, @RequestBody Inventory inventory) {
-        inventoryService.update(warehouseId, itemId, inventory);
+    public ResponseEntity<Inventory> updateInventory(@PathVariable int warehouseId, @PathVariable int itemId, @RequestBody Inventory inventory) {
+        return ResponseEntity.status(HttpStatus.OK).body(inventoryService.update(warehouseId, itemId, inventory));
     }
 
     @DeleteMapping("/delete/{warehouseId}/{itemId}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable int warehouseId, @PathVariable int itemId) {
+    public ResponseEntity<Void> deleteById(@PathVariable int warehouseId, @PathVariable int itemId) {
         inventoryService.deleteById(warehouseId, itemId);
+        return ResponseEntity.noContent().build();
     }
 }

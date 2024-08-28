@@ -55,13 +55,13 @@ public class InventoryService {
     }
 
     @Transactional
-    public void update(int warehouseId, int itemId, Inventory inventory) {
+    public Inventory update(int warehouseId, int itemId, Inventory inventory) {
         if (!inventoryRepository.existsById(new InventoryKey(warehouseId, itemId))) {
             throw new RuntimeException("Inventory already exists");
         }
         inventory.setWarehouseId(warehouseId);
         inventory.setItemId(itemId);
-        inventoryRepository.save(inventory);
+        return inventoryRepository.save(inventory);
     }
 
     @Transactional
