@@ -31,7 +31,7 @@ public class updateitemSteps {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @Given("I am on the Warehouses page")
+    @Given("I am on the {string} page")
     public void i_am_on_the_warehouses_page() {
         driver.get("http://localhost:5173/warehouses"); 
     }

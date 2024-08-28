@@ -13,11 +13,13 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import dev.failsafe.internal.util.Assert;
 
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -27,25 +29,25 @@ import static org.testng.Assert.assertNotNull;
 
 public class ViewAllWarehousesSteps {
 
-    WebDriver driver;
+    WebDriver warehouseDriver;
     
 
-    @Given("I am on the landing page")
-    public void iAmOnTheLandingPage() {
-        // Initialize the WebDriver and navigate to the landing page
-        driver = new FirefoxDriver();
-        driver.get("http://localhost:5173"); // Adjust URL to match your React app's landing page
-    }
+    @Given("I am on the {string} page")
+    public void i_am_on_the_page(String string) {
+        FirefoxOptions options = new FirefoxOptions();
 
-    @When("I navigate to the warehouses page")
-    public void iNavigateToTheWarehousesPage() {
-        // Navigate by anchro linktext
+        Duration duration = Duration.of(3, ChronoUnit.SECONDS);
+	    options.setImplicitWaitTimeout(duration);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement warehousesLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='/warehouses']")));
-        //((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", warehousesLink);
+        options.addArguments("-headless");
 
-        warehousesLink.click();
+        //generate driver with options and get items page
+        warehouseDriver = new FirefoxDriver(options);
+        warehouseDriver.get("http://localhost:5173/warehouses");
+
+        WebElement titleParent = warehouseDriver.findElement(By.className("_container_1avss_1"));
+        WebElement title = titleParent.findElement(By.className("_title_1avss_15"));
+        assertEquals(title.getText(),string);
     }
 
     @When("there is one or more warehouses existing")
@@ -53,21 +55,15 @@ public class ViewAllWarehousesSteps {
         // This step assumes that warehouses exist and are displayed on the page.
         // In an actual test environment, you might need to prepopulate the database or mock the backend to ensure warehouses exist.
         
-        try{
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            WebElement warehousesLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("_record_9ratk_1")));
-            assertTrue(true, "There are warehouses!");
-        }
-        catch(Exception e){
-            assertFalse(false, "It's Empty!");
-        }
+            Boolean isPresent = warehouseDriver.findElements(By.className("_record_9ratk_1")).size() > 0;
+            assertTrue(isPresent);
         
     }
 
     @Then("I should see a list of all warehouses created")
     public void iShouldSeeAListOfAllWarehousesCreated() {
         // Verify that the list of warehouses is displayed
-        List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
+        List<WebElement> warehousesList = warehouseDriver.findElements(By.className("_record_9ratk_1"));
         
 
         /* ---------------IMPORTANT------------- */
@@ -78,7 +74,7 @@ public class ViewAllWarehousesSteps {
     @Then("each warehouse should display the warehouse name, owner, location, and maximum capacity")
     public void eachWarehouseShouldDisplayDetails() {
         // Verify that each warehouse item displays the correct details
-        List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
+        List<WebElement> warehousesList = warehouseDriver.findElements(By.className("_record_9ratk_1"));
         for (WebElement warehouse : warehousesList) {
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse name is missing");
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse owner is missing");
@@ -89,9 +85,7 @@ public class ViewAllWarehousesSteps {
 
     @When("there is no current warehouses existing")
     public void thereIsNoCurrentWarehousesExisting() {
-        /*  Changing in postgres for now 
-            assume proper implementation later
-        */
+        assertTrue(true);
     }
 
     @Then("I should see an empty list of warehouses created")
@@ -99,15 +93,15 @@ public class ViewAllWarehousesSteps {
         
         /* ---------------IMPORTANT------------- */
         //Change to assertFalse to test empty vs occupied warehouse
-        List<WebElement> warehousesList = driver.findElements(By.cssSelector(".warehouse-item"));
+        List<WebElement> warehousesList = warehouseDriver.findElements(By.cssSelector(".warehouse-item"));
         assertTrue(warehousesList.isEmpty(),"Warehouses list should be empty");
     }
 
     // Cleanup after test execution
     @After
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+        if (warehouseDriver != null) {
+            warehouseDriver.quit();
         }
     }
 }
