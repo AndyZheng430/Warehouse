@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -16,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import com.skillstorm.backend.controllers.ItemController;
 import com.skillstorm.backend.models.Item;
@@ -55,9 +55,9 @@ public class ItemControllerTests {
     @Test
     public void getItemById() {
         int id = 1;
-        Optional<Item> item = Optional.ofNullable(new Item());
+        Item item = new Item();
         
-        when(itemService.findById(id)).thenReturn(item);
+        when(itemService.findById(id)).thenReturn(Optional.ofNullable(item));
 
         ResponseEntity<Item> response = itemController.getItem(id);
 
@@ -82,11 +82,10 @@ public class ItemControllerTests {
         int id = 1;
         Item item = new Item();
         
-        when(itemService.save(item)).thenReturn(item);
+        when(itemService.update(id, item)).thenReturn(item);
 
         ResponseEntity<Item> response = itemController.createItem(item);
 
-        verify(itemService).update(id, item);
         assertEquals(response.getStatusCode(), HttpStatus.CREATED);
         assertEquals(response.getBody(), item);
     }

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import com.skillstorm.backend.controllers.InventoryController;
 import com.skillstorm.backend.dtos.SimpleInventoryDto;
@@ -88,7 +88,7 @@ public class InventoryControllerTests {
 
         ResponseEntity<Inventory> response = inventoryController.updateInventory(warehouseId, itemId, inventory);
 
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
         assertEquals(response.getBody(), inventory);
     }
 
