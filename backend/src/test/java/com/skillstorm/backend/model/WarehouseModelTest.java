@@ -1,15 +1,17 @@
-package com.skillstorm.backend;
+package com.skillstorm.backend.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.skillstorm.backend.models.Inventory;
 import com.skillstorm.backend.models.Warehouse;
 
 import jakarta.validation.ConstraintViolation;
@@ -17,7 +19,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-public class WarehouseModelTests {
+public class WarehouseModelTest {
 
     private Warehouse warehouse;
     private Validator validator; 
@@ -36,10 +38,24 @@ public class WarehouseModelTests {
 
     @Test
     public void testWarehouseAttributes() {
-        assertEquals("Warehouse 1", warehouse.getName());
-        assertEquals("Bill", warehouse.getOwner());
-        assertEquals("Ship Port", warehouse.getLocation());
-        assertEquals(1000, warehouse.getMaxCapacity());
+        String name = "Warehouse 1";
+        String owner = "Bill";
+        String location = "Ship Port";
+        int capacity = 1000;
+        Inventory inventory = new Inventory();
+
+        warehouse = new Warehouse();
+        warehouse.setName(name);
+        warehouse.setOwner(owner);
+        warehouse.setLocation(location);
+        warehouse.setMaxCapacity(capacity);
+        warehouse.setInventories(Arrays.asList(inventory));
+
+        assertEquals(name, warehouse.getName());
+        assertEquals(owner, warehouse.getOwner());
+        assertEquals(location, warehouse.getLocation());
+        assertEquals(capacity, warehouse.getMaxCapacity());
+        assertEquals(Arrays.asList(inventory), warehouse.getInventories());
 
         Set<ConstraintViolation<Warehouse>> violations = validator.validate(warehouse);
         assertTrue(violations.isEmpty());

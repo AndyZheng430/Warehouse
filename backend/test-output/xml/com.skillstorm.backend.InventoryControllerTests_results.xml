@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestNGTest-974a5f55-c584-47a1-90fa-81f522a632ff"
+           tests="5"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="0.451">
+    <properties></properties>
+
+
+
+            <testcase
+                name="createInventory"
+                time="0.436"
+                classname="com.skillstorm.backend.InventoryControllerTests">
+            </testcase>
+            <testcase
+                name="editInventory"
+                time="0.004"
+                classname="com.skillstorm.backend.InventoryControllerTests">
+            </testcase>
+            <testcase
+                name="getAllInventory"
+                time="0.004"
+                classname="com.skillstorm.backend.InventoryControllerTests">
+            </testcase>
+            <testcase
+                name="getInventoryById"
+                time="0.005"
+                classname="com.skillstorm.backend.InventoryControllerTests">
+            </testcase>
+            <testcase
+                name="deleteInventory"
+                time="0.002"
+                classname="com.skillstorm.backend.InventoryControllerTests">
+            </testcase>
+</testsuite>

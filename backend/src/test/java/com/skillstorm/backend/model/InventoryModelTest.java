@@ -1,4 +1,4 @@
-package com.skillstorm.backend;
+package com.skillstorm.backend.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,7 +20,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-public class InventoryModelTests {
+public class InventoryModelTest {
     
     private Inventory inventory;
     private Warehouse warehouse;
@@ -42,6 +42,8 @@ public class InventoryModelTests {
         assertEquals(1, inventory.getWarehouseId());
         assertEquals(1, inventory.getItemId());
         assertEquals(100, inventory.getAmount());
+        assertEquals(item, inventory.getItem());
+        assertEquals(warehouse, inventory.getWarehouse());
 
         Set<ConstraintViolation<Inventory>> violations = validator.validate(inventory);
         assertTrue(violations.isEmpty());

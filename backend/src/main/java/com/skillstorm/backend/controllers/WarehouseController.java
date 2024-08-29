@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,8 +33,8 @@ public class WarehouseController {
     }
 
     @GetMapping()
-    public List<WarehouseDto> getAll() {
-        return warehouseService.findAll();
+    public ResponseEntity<List<WarehouseDto>> getAll() {
+        return ResponseEntity.ok(warehouseService.findAll());
     }
 
     @GetMapping("/{id}")
@@ -45,19 +44,19 @@ public class WarehouseController {
     }
     
     @PostMapping("/create")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public Warehouse createWarehouse(@Valid @RequestBody Warehouse warehouse) {
-        return warehouseService.save(warehouse);
+    public ResponseEntity<Warehouse> createWarehouse(@Valid @RequestBody Warehouse warehouse) {
+        warehouseService.save(warehouse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(warehouse);
     }
 
     @PutMapping("edit/{id}")
-    public Warehouse updateWarehouse(@PathVariable int id, @RequestBody Warehouse warehouse) {
-        return warehouseService.update(id, warehouse);
+    public ResponseEntity<Warehouse> updateWarehouse(@PathVariable int id, @RequestBody Warehouse warehouse) {
+        return ResponseEntity.status(HttpStatus.OK).body(warehouseService.update(id, warehouse));
     }
     
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteWarehouse(@PathVariable int id) {
+    public ResponseEntity<Void> deleteWarehouse(@PathVariable int id) {
         warehouseService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

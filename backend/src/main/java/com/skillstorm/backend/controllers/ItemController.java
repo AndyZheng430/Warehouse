@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,12 +33,12 @@ public class ItemController {
     }
 
     @GetMapping()
-    public List<Item> getAll() {
-        return itemService.findAll();
+    public ResponseEntity<List<Item>> getAll() {
+        return ResponseEntity.ok(itemService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> getMethodName(@PathVariable int id) {
+    public ResponseEntity<Item> getItem(@PathVariable int id) {
         Optional<Item> item = itemService.findById(id);
         if (item.isPresent()) {
             return ResponseEntity.ok(item.get());
@@ -48,24 +47,24 @@ public class ItemController {
     }
     
     @GetMapping("/name/{name}")
-    public List<Item> getMethodName(@PathVariable String name) {
+    public List<Item> getItemsByName(@PathVariable String name) {
         return itemService.findByName(name);
     }
 
     @PostMapping("/create")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public Item createItem(@Valid @RequestBody Item item) {
-        return itemService.save(item);
+    public ResponseEntity<Item> createItem(@Valid @RequestBody Item item) {
+        itemService.save(item);
+        return ResponseEntity.status(HttpStatus.CREATED).body(item);
     }
     
     @PutMapping("edit/{id}")
-    public Item updateItem(@PathVariable int id, @RequestBody Item item) {
-        return itemService.update(id, item);
+    public ResponseEntity<Item> updateItem(@PathVariable int id, @RequestBody Item item) {
+        return ResponseEntity.status(HttpStatus.OK).body(itemService.update(id, item));
     }
 
     @DeleteMapping("/delete/{id}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteItem(@PathVariable int id) {
+    public ResponseEntity<Void> deleteItem(@PathVariable int id) {
         itemService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
