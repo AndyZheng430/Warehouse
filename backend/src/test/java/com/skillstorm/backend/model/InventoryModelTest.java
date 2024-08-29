@@ -42,6 +42,8 @@ public class InventoryModelTest {
         assertEquals(1, inventory.getWarehouseId());
         assertEquals(1, inventory.getItemId());
         assertEquals(100, inventory.getAmount());
+        assertEquals(item, inventory.getItem());
+        assertEquals(warehouse, inventory.getWarehouse());
 
         Set<ConstraintViolation<Inventory>> violations = validator.validate(inventory);
         assertTrue(violations.isEmpty());

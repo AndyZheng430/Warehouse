@@ -57,7 +57,7 @@ public class InventoryService {
     @Transactional
     public Inventory update(int warehouseId, int itemId, Inventory inventory) {
         if (!inventoryRepository.existsById(new InventoryKey(warehouseId, itemId))) {
-            throw new RuntimeException("Inventory already exists");
+            throw new RuntimeException("Inventory does not exists");
         }
         inventory.setWarehouseId(warehouseId);
         inventory.setItemId(itemId);

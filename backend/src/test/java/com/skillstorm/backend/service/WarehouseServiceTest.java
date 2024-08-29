@@ -1,6 +1,7 @@
 package com.skillstorm.backend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -101,6 +102,17 @@ public class WarehouseServiceTest {
         Warehouse response = warehouseService.update(id, warehouse);
 
         assertEquals(warehouse, response);
+    }
+
+    @Test 
+    public void updateWarehouseIdNotExist() {
+        int id = 1;
+        Warehouse warehouse = new Warehouse();
+
+        when(warehouseRepository.existsById(id)).thenReturn(false);
+        when(warehouseRepository.save(warehouse)).thenThrow(RuntimeException.class);
+
+        assertThrows(RuntimeException.class, () -> warehouseService.update(id, warehouse));
     }
 
     @Test

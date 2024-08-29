@@ -65,6 +65,28 @@ public class ItemControllerTest {
     }
 
     @Test
+    public void testGetItemByIdNotFound() {
+        int id = 1;
+        
+        when(itemService.findById(id)).thenReturn(Optional.empty());
+
+        ResponseEntity<Item> response = itemController.getItem(id);
+
+        assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
+    }
+
+    @Test void testGetItemsByName() {
+        String name = "name";
+        List<Item> items = Arrays.asList(new Item(), new Item());
+
+        when(itemService.findByName(name)).thenReturn(items);
+
+        List<Item> response = itemController.getItemsByName(name);
+
+        assertEquals(items, response);
+    }
+    
+    @Test
     public void testCreateItem() {
         Item item = new Item();
         
@@ -77,15 +99,15 @@ public class ItemControllerTest {
     }
 
     @Test
-    public void testEditItem() {
+    public void testUpdateItem() {
         int id = 1;
         Item item = new Item();
         
         when(itemService.update(id, item)).thenReturn(item);
 
-        ResponseEntity<Item> response = itemController.createItem(item);
+        ResponseEntity<Item> response = itemController.updateItem(id, item);
 
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
         assertEquals(response.getBody(), item);
     }
 

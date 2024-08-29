@@ -1,6 +1,7 @@
 package com.skillstorm.backend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,6 +73,54 @@ public class InventoryServiceTest {
         assertEquals(inventory, response);
     }
 
+    @Test(expectedExceptions = RuntimeException.class, priority = 1)
+    public void saveInventoryNoWarehouseExists() {
+        int warehouseId = 1;
+        int itemId = 1;
+        int amount = 100;
+        SimpleInventoryDto simpleInventoryDto = new SimpleInventoryDto(warehouseId, itemId, amount);
+        Warehouse warehouse = new Warehouse();
+        Item item = new Item();
+        Inventory inventory = new Inventory();
+        inventory.setWarehouseId(warehouseId);
+        inventory.setItemId(itemId);
+        inventory.setAmount(amount);
+        inventory.setWarehouse(warehouse);
+        inventory.setItem(item);
+
+        when(itemRepository.findById(warehouseId)).thenReturn(Optional.ofNullable(item));
+        when(warehouseRepository.findById(itemId)).thenReturn(Optional.empty());
+        when(inventoryRepository.save(any(Inventory.class))).thenThrow(RuntimeException.class);
+
+        inventoryService.save(simpleInventoryDto);
+
+        assertThrows(RuntimeException.class, () -> inventoryService.save(simpleInventoryDto));
+    }
+
+    @Test(expectedExceptions = RuntimeException.class, priority = 1)
+    public void saveInventoryNoItemExists() {
+        int warehouseId = 1;
+        int itemId = 1;
+        int amount = 100;
+        SimpleInventoryDto simpleInventoryDto = new SimpleInventoryDto(warehouseId, itemId, amount);
+        Warehouse warehouse = new Warehouse();
+        Item item = new Item();
+        Inventory inventory = new Inventory();
+        inventory.setWarehouseId(warehouseId);
+        inventory.setItemId(itemId);
+        inventory.setAmount(amount);
+        inventory.setWarehouse(warehouse);
+        inventory.setItem(item);
+
+        when(itemRepository.findById(warehouseId)).thenReturn(Optional.empty());
+        when(warehouseRepository.findById(itemId)).thenReturn(Optional.ofNullable(warehouse));
+        when(inventoryRepository.save(any(Inventory.class))).thenThrow(RuntimeException.class);
+
+        inventoryService.save(simpleInventoryDto);
+
+        assertThrows(RuntimeException.class, () -> inventoryService.save(simpleInventoryDto));
+    }
+
     @Test
     public void findInventoryById() {
         int warehouseId = 1;
@@ -101,6 +150,8 @@ public class InventoryServiceTest {
         int warehouseId = 1;
         int itemId = 1;
         Inventory inventory = new Inventory();
+        inventory.setWarehouseId(warehouseId);
+        inventory.setItemId(itemId);
 
         when(inventoryRepository.existsById(new InventoryKey(warehouseId, itemId))).thenReturn(true);
         when(inventoryRepository.save(inventory)).thenReturn(inventory);
@@ -108,6 +159,20 @@ public class InventoryServiceTest {
         Inventory response = inventoryService.update(warehouseId, itemId, inventory);
 
         assertEquals(inventory, response);
+    }
+
+    @Test(expectedExceptions = RuntimeException.class, priority = 1)
+    public void updateInventoryNoInventoryExists() {
+        int warehouseId = 1;
+        int itemId = 1;
+        Inventory inventory = new Inventory();
+
+        when(inventoryRepository.existsById(new InventoryKey(warehouseId, itemId))).thenReturn(false);
+        when(inventoryRepository.save(inventory)).thenThrow(RuntimeException.class);
+
+        inventoryService.update(warehouseId, itemId, inventory);
+        
+        assertThrows(RuntimeException.class, () -> inventoryService.update(warehouseId, itemId, inventory));
     }
 
     @Test

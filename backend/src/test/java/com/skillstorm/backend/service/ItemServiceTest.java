@@ -1,6 +1,7 @@
 package com.skillstorm.backend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -49,6 +50,17 @@ public class ItemServiceTest {
     }
 
     @Test
+    public void findAllItems() {
+        List<Item> items = Arrays.asList(new Item(), new Item());
+
+        when(itemRepository.findAll()).thenReturn(items);
+
+        List<Item> response = itemService.findAll();
+
+        assertEquals(items, response);
+    }
+
+    @Test
     public void findItemById() {
         int id = 1;
         Optional<Item> item = Optional.ofNullable(new Item());
@@ -61,12 +73,13 @@ public class ItemServiceTest {
     }
 
     @Test
-    public void findAllItems() {
+    public void findItemsByName() {
+        String name = "name";
         List<Item> items = Arrays.asList(new Item(), new Item());
 
-        when(itemRepository.findAll()).thenReturn(items);
+        when(itemRepository.findByName(name)).thenReturn(items);
 
-        List<Item> response = itemService.findAll();
+        List<Item> response = itemService.findByName(name);
 
         assertEquals(items, response);
     }
@@ -85,10 +98,21 @@ public class ItemServiceTest {
     }
 
     @Test
+    public void updateItemNoItemExists() {
+        int id = 1;
+        Item item = new Item();
+
+        when(itemRepository.save(item)).thenThrow(RuntimeException.class);
+        when(itemRepository.existsById(id)).thenReturn(false);
+
+        assertThrows(RuntimeException.class, () -> itemService.update(id, item));
+    }
+
+    @Test
     public void deleteItemById() {
         int id = 1;
 
-        itemRepository.deleteById(id);
+        itemService.deleteById(id);
 
         verify(itemRepository).deleteById(id);
     }
