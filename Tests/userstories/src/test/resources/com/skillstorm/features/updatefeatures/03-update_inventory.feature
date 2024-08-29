@@ -1,7 +1,7 @@
 Feature: Update Inventory
-  As a user, 
-  I want to be able to edit the product
-  So I can make modifications to the product
+  As a user,  
+  I want to be able to edit the Inventory 
+  So I can make changes to the amount and item 
 
   Scenario: Display inventory update
     Given I am on the Warehouses page
