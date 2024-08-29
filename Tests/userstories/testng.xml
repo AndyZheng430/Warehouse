@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="CRUD user stories">
-  <test  name="View">
+  <test  name="View" enabled="true">
     <classes>
-      <class name="com.skillstorm.runner.ViewRunner"/>
+      <class name="com.skillstorm.runners.ViewRunner"/>
     </classes>
   </test> <!-- Test -->
 
-    <test  name="Update">
+    <test  name="Update" enabled="false">
     <classes>
-      <class name="com.skillstorm.runner.UpdateRunner"/>
+      <class name="com.skillstorm.runners.UpdateRunner"/>
     </classes>
   </test> 
 
-  <test  name="Delete">
+  <test  name="Delete" enabled="false">
     <classes>
-      <class name="com.skillstorm.runner.DeleteRunner"/>
+      <class name="com.skillstorm.runners.DeleteRunner"/>
     </classes>
   </test> 
 
