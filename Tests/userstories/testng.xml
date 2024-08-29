@@ -7,13 +7,13 @@
     </classes>
   </test> <!-- Test -->
 
-    <test  name="Update" enabled="false">
+    <test  name="Update" enabled="true">
     <classes>
       <class name="com.skillstorm.runners.UpdateRunner"/>
     </classes>
   </test> 
 
-  <test  name="Delete" enabled="false">
+  <test  name="Delete" enabled="true">
     <classes>
       <class name="com.skillstorm.runners.DeleteRunner"/>
     </classes>
