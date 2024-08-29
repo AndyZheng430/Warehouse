@@ -20,7 +20,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-public class InventoryModelTests {
+public class InventoryModelTest {
     
     private Inventory inventory;
     private Warehouse warehouse;

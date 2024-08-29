@@ -17,7 +17,7 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
-public class ItemModelTests {
+public class ItemModelTest {
 
     private Item item;
     private Validator validator; 

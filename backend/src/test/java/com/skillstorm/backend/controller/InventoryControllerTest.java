@@ -1,4 +1,4 @@
-package com.skillstorm.backend;
+package com.skillstorm.backend.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -21,7 +21,7 @@ import com.skillstorm.backend.dtos.SimpleInventoryDto;
 import com.skillstorm.backend.models.Inventory;
 import com.skillstorm.backend.services.InventoryService;
 
-public class InventoryControllerTests {
+public class InventoryControllerTest {
     @Mock
     private InventoryService inventoryService;
 
@@ -40,7 +40,7 @@ public class InventoryControllerTests {
     }
 
     @Test
-    public void getAllInventory() {
+    public void testGetAllInventory() {
         List<Inventory> inventories = Arrays.asList(new Inventory(), new Inventory());
 
         when(inventoryService.findAll()).thenReturn(inventories);
@@ -52,7 +52,7 @@ public class InventoryControllerTests {
     }
 
     @Test
-    public void getInventoryById() {
+    public void testGetInventoryById() {
         int warehouseId = 1;
         int itemId = 1;
         Optional<Inventory> inventory = Optional.ofNullable(new Inventory());
@@ -66,7 +66,7 @@ public class InventoryControllerTests {
     }
 
     @Test
-    public void createInventory() {
+    public void testCreateInventory() {
         Inventory inventory = new Inventory();
         SimpleInventoryDto inventoryDto = new SimpleInventoryDto();
 
@@ -79,7 +79,7 @@ public class InventoryControllerTests {
     }
 
     @Test
-    public void editInventory() {
+    public void testEditInventory() {
         int warehouseId = 1;
         int itemId = 1;
         Inventory inventory = new Inventory();
@@ -93,7 +93,7 @@ public class InventoryControllerTests {
     }
 
     @Test
-    public void deleteInventory() {
+    public void testDeleteInventory() {
         int warehouseId = 1;
         int itemId = 1;
 

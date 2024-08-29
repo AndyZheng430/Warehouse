@@ -1,4 +1,4 @@
-package com.skillstorm.backend;
+package com.skillstorm.backend.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -21,7 +21,7 @@ import com.skillstorm.backend.controllers.WarehouseController;
 import com.skillstorm.backend.dtos.WarehouseDto;
 import com.skillstorm.backend.models.Warehouse;
 
-public class WarehouseControllerTests {
+public class WarehouseControllerTest {
     
     @Mock
     private WarehouseService warehouseService;

@@ -1,7 +1,6 @@
-package com.skillstorm.backend;
+package com.skillstorm.backend.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -21,7 +20,7 @@ import com.skillstorm.backend.controllers.ItemController;
 import com.skillstorm.backend.models.Item;
 import com.skillstorm.backend.services.ItemService;
 
-public class ItemControllerTests {
+public class ItemControllerTest {
     
     @Mock
     private ItemService itemService;
@@ -41,7 +40,7 @@ public class ItemControllerTests {
     }
 
     @Test
-    public void getAllItems() {
+    public void testGetAllItems() {
         List<Item> items = Arrays.asList(new Item(), new Item());
         
         when(itemService.findAll()).thenReturn(items);
@@ -53,7 +52,7 @@ public class ItemControllerTests {
     }
 
     @Test
-    public void getItemById() {
+    public void testGetItemById() {
         int id = 1;
         Item item = new Item();
         
@@ -66,7 +65,7 @@ public class ItemControllerTests {
     }
 
     @Test
-    public void createItem() {
+    public void testCreateItem() {
         Item item = new Item();
         
         when(itemService.save(item)).thenReturn(item);
@@ -78,7 +77,7 @@ public class ItemControllerTests {
     }
 
     @Test
-    public void editItem() {
+    public void testEditItem() {
         int id = 1;
         Item item = new Item();
         
@@ -91,7 +90,7 @@ public class ItemControllerTests {
     }
 
     @Test 
-    public void deleteItem() {
+    public void testDeleteItem() {
         int id = 1;
 
         ResponseEntity<Void> response = itemController.deleteItem(id);
