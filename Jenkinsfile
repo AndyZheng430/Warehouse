@@ -41,15 +41,17 @@ pipeline {
                     string(credentialsId: 'DB_USER', variable: 'DB_USER'),
                     string(credentialsId: 'DB_PASS', variable: 'DB_PASS'), 
                     string(credentialsId: 'DB_URL', variable: 'DB_URL')]){
-                           dir('backend') {
-                                sh(script: '''  
-                            mvn spring-boot:run -Dspring-boot.run.arguments="--DB_URL=${DB_URL} --DB_USER=${DB_USER} --DB_PASS=${DB_PASS}" &
-                            echo \$!
-                                ''', returnStdout: true).trim()
-                            }
-                        }
-                }  
+                        //    dir('backend') {
+                        //         sh(script: '''  
+                        //     mvn spring-boot:run -Dspring-boot.run.arguments="--DB_URL=${DB_URL} --DB_USER=${DB_USER} --DB_PASS=${DB_PASS}" &
+                        //     echo \$!
+                        //         ''', returnStdout: true).trim()
+                        //     }
+                        
+                  
                 sh "cd backend && mvn clean install && ls target/"
+                    }
+                 }
                 withSonarQubeEnv('SonarCloud') {
                 sh '''
                     cd backend &&
