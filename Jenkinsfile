@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    enviorment{}
     stages{
         stage('Build Frontend'){
             steps{
@@ -19,8 +19,7 @@ pipeline {
                     '''
                 }
             }
-        
-            }
+        }
         stage('Deploy Frontend'){
             steps{
                 script{
@@ -61,6 +60,18 @@ pipeline {
                      -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
                      '''
                 }
+                script{
+                    withCredentials([
+                    string(credentialsId: 'DB_USER', VARIABLE: 'DB_USER'),
+                    string(credentialsId: 'DB_PASS', VARIABLE: 'DB_PASS'), 
+                    string(credentialsId: 'DB_URL', VARIABLE: 'DB_URL')]){
+                        sh ''' 
+                            cd backend && 
+                            mvn spring-boot:run -Dspring-boot.run.arguments="--DB_URL=${DB_URL} --DB_USER=${DB_USER} --DB_PASS=${DB_PASS}" &
+                            echo \$!
+                            '''
+                    }
+                }  
             }
         }
         stage('Test Backend'){
@@ -70,12 +81,13 @@ pipeline {
         }
         stage('Deploy Backend'){
             steps{
+                env.VERSION = '${env.BUILD_ID}'.toInteger() + 1
                 script{
                   withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh 'pwd'
                         sh "aws s3 cp backend/target/backend-0.0.1-SNAPSHOT.jar s3://team8-backend "
-                        sh  'aws elasticbeanstalk create-application-version --application-name team8-backend --version-label 0.0.${env.BUILD_NUMBER} --source-bundle S3Bucket=\"team8-backend\",S3Key=\"backend-0.0.1-SNAPSHOT.jar\"'
-                        sh  'aws elasticbeanstalk update-environment --environment-name Team8-backend-env --version-label 1.0.9'
+                        sh 'aws elasticbeanstalk create-application-version --application-name team8-backend --version-label 0.0.${env.VERSION} --source-bundle S3Bucket=\"team8-backend\",S3Key=\"backend-0.0.1-SNAPSHOT.jar\"'
+                        sh 'aws elasticbeanstalk update-environment --environment-name Team8-backend-env --version-label 1.0.9'
                     }  
                 }   
             }
