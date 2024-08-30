@@ -65,12 +65,13 @@ pipeline {
                     string(credentialsId: 'DB_USER', VARIABLE: 'DB_USER'),
                     string(credentialsId: 'DB_PASS', VARIABLE: 'DB_PASS'), 
                     string(credentialsId: 'DB_URL', VARIABLE: 'DB_URL')]){
-                        sh ''' 
-                            cd backend && 
+                           dir('backend') {
+                                sh(script: '''  
                             mvn spring-boot:run -Dspring-boot.run.arguments="--DB_URL=${DB_URL} --DB_USER=${DB_USER} --DB_PASS=${DB_PASS}" &
                             echo \$!
-                            '''
-                    }
+                                ''', returnStdout: true).trim()
+                            }
+                        }
                 }  
             }
         }
