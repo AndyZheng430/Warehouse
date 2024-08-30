@@ -1,5 +1,22 @@
 pipeline {
     agent any
+
+        environment {
+        
+        PATCH_VERSION = "${env.BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Prepare Version') {
+            steps {
+                script {
+                    def newPatchVersion = PATCH_VERSION.toInteger() + 1
+                    env.VERSION = "0.0.${newPatchVersion}"
+                    echo "Updated version to: ${env.VERSION}"
+                }
+            }
+        }
+
     
     stages{
         stage('Build Frontend'){
@@ -83,7 +100,7 @@ pipeline {
                   withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh 'pwd'
                         sh "aws s3 cp backend/target/backend-0.0.1-SNAPSHOT.jar s3://team8-backend "
-                        sh 'aws elasticbeanstalk create-application-version --application-name team8-backend --version-label 0.0.${env.BUILD_NUMBER} --source-bundle S3Bucket=\"team8-backend\",S3Key=\"backend-0.0.1-SNAPSHOT.jar\"'
+                        sh 'aws elasticbeanstalk create-application-version --application-name team8-backend --version-label ${env.VERSION} --source-bundle S3Bucket=\"team8-backend\",S3Key=\"backend-0.0.1-SNAPSHOT.jar\"'
                         sh 'aws elasticbeanstalk update-environment --environment-name Team8-backend-env --version-label 1.0.9'
                     }  
                 }   
