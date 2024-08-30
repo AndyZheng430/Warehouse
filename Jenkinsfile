@@ -36,19 +36,7 @@ pipeline {
         }
         stage('Build Backend'){
             steps{
-                  
-                sh "cd backend && mvn clean install && ls target/"
-                withSonarQubeEnv('SonarCloud') {
-                sh '''
-                    cd backend &&
-                     mvn sonar:sonar \
-                     -Dsonar.projectKey=AndyZheng430_Warehouse \
-                     -Dsonar.projectName=Warehouse_Backend \
-                     -Dsonar.java.binaries=target/classes \
-                     -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                     '''
-                }
-                script{
+                 script{
                     withCredentials([
                     string(credentialsId: 'DB_USER', variable: 'DB_USER'),
                     string(credentialsId: 'DB_PASS', variable: 'DB_PASS'), 
@@ -61,6 +49,18 @@ pipeline {
                             }
                         }
                 }  
+                sh "cd backend && mvn clean install && ls target/"
+                withSonarQubeEnv('SonarCloud') {
+                sh '''
+                    cd backend &&
+                     mvn sonar:sonar \
+                     -Dsonar.projectKey=AndyZheng430_Warehouse \
+                     -Dsonar.projectName=Warehouse_Backend \
+                     -Dsonar.java.binaries=target/classes \
+                     -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+                     '''
+                }
+                 
             }
         }
         stage('Test Backend'){
