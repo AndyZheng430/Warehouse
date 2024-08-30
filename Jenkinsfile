@@ -39,9 +39,9 @@ pipeline {
             steps{
                 script{
                     withCredentials([
-                     string(credentialsId: 'DB_USER', VARIABLE: 'DB_USER'),
-                     string(credentialsId: 'DB_PASS', VARIABLE: 'DB_PASS'), 
-                     string(credentialsId: 'DB_URL', VARIABLE: 'DB_URL')]){
+                     string(credentialsId: 'DB_USER', variable: 'DB_USER'),
+                     string(credentialsId: 'DB_PASS', variable: 'DB_PASS'), 
+                     string(credentialsId: 'DB_URL', variable: 'DB_URL')]){
                        dir('backend'){
                         sh(script:'''
                         mvn spring-boot:run -Dspring-boot.run.arguments="--DB_URL=${DB_URL} --DB_USER=${DB_USER} --DB_PASS=${DB_PASS}" 
