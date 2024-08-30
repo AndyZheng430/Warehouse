@@ -1,23 +1,5 @@
 pipeline {
     agent any
-
-        environment {
-        
-        def PATCH_VERSION = "${env.BUILD_NUMBER}"
-    }
-
-    stages {
-        stage('Prepare Version') {
-            steps {
-                script {
-                    def newPatchVersion = PATCH_VERSION.toInteger() + 1
-                    env.VERSION = "0.0.${newPatchVersion}"
-                    echo "Updated version to: ${env.VERSION}"
-                }
-            }
-        }
-    }
-
     
     stages{
         stage('Build Frontend'){
