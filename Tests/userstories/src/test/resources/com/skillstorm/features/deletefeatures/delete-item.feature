@@ -4,7 +4,7 @@ Feature: Delete an item
     I want to delete an item,
     so it no longer exists
 
-    Scenario:
+    Scenario: Deleting an item
         Given the user is on the Item page
         And there is an item
         When the user clicks the delete button 

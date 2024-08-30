@@ -9,5 +9,5 @@ Feature: Delete a Warehouse
         And there is a warehouse
         When the user clicks the delete button
         Then the warehouse should be removed
-        and the inventory with the warehouse id should be removed
+        And the inventory with the warehouse id should be removed
     
