@@ -3,7 +3,7 @@ pipeline {
 
         environment {
         
-        PATCH_VERSION = "${env.BUILD_NUMBER}"
+        def PATCH_VERSION = "${env.BUILD_NUMBER}"
     }
 
     stages {
