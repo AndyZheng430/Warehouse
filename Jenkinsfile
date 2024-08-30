@@ -67,7 +67,14 @@ pipeline {
         }
         stage('Test Backend'){
             steps{
+                script{
+                    withCredentials([
+                    string(credentialsId: 'DB_USER', variable: 'DB_USER'),
+                    string(credentialsId: 'DB_PASS', variable: 'DB_PASS'), 
+                    string(credentialsId: 'DB_URL', variable: 'DB_URL')]){
                 sh "cd backend && mvn test"
+                    }
+                }
             }
         }
         stage('Deploy Backend'){
