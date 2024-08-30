@@ -80,7 +80,8 @@ pipeline {
         stage('Deploy Backend'){
             steps{
                 script{
-                    def build = env.BUILD_NUMBER.toInteger() + 1
+                    def build = '${env.BUILD_NUMBER}'.toInteger() + 1
+                    echo 'version: ${build}'
                     withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh 'pwd'
                         sh "aws s3 cp backend/target/backend-0.0.1-SNAPSHOT.jar s3://team8-backend"
