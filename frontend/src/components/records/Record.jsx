@@ -7,7 +7,7 @@ import { FaTrash, FaPlus } from "react-icons/fa";
 
 export const Record = ({warehouse, handleDelete, handleEdit, handleDeleteInventory, setShowInventoryModal, setInventoryWarehouseId, setInventoryItem}) => {
 
-	const [showInventory, setShowInventory] = useState(false);
+	const [showInventory, setShowInventory] = useState(true);
 
 	// toggles display inventory information
 	const toggleInventory = () => {
