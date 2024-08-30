@@ -80,7 +80,7 @@ pipeline {
         stage('Deploy Backend'){
             steps{
                 script{
-                    def build = '${env.BUILD_NUMBER}'.toInteger() + 1
+                    def build = env.BUILD_NUMBER.toInteger()
                     echo 'version: ${build}'
                     withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh 'pwd'
