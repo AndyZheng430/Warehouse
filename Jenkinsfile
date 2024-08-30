@@ -37,6 +37,20 @@ pipeline {
         }
         stage('Build Backend'){
             steps{
+                script{
+                    withCredentials([
+                     string(credentialsId: 'DB_USER', VARIABLE: 'DB_USER'),
+                     string(credentialsId: 'DB_PASS', VARIABLE: 'DB_PASS'), 
+                     string(credentialsId: 'DB_URL', VARIABLE: 'DB_URL')]){
+                       dir('backend'){
+                        sh(script:'''
+                        mvn spring-boot:run -Dspring-boot.run.arguments="--DB_URL=${DB_URL} --DB_USER=${DB_USER} --DB_PWD=${DB_PWD}" &
+                                    echo \$!
+                                ''', returnStdout: true).trim()
+                            }
+                        }
+
+                     }  
                 sh "cd backend && mvn clean install && ls target/"
                 withSonarQubeEnv('SonarCloud') {
                 sh '''

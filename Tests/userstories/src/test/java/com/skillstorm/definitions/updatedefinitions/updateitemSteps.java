@@ -1,4 +1,4 @@
-package com.skillstorm;
+package com.skillstorm.definitions.updatedefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.And;
@@ -10,14 +10,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
 public class updateitemSteps {
     
@@ -30,7 +31,7 @@ public class updateitemSteps {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @Given("I am on the Warehouses page")
+    @Given("I am on the {string} page")
     public void i_am_on_the_warehouses_page() {
         driver.get("http://localhost:5173/warehouses"); 
     }

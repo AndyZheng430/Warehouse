@@ -1,4 +1,4 @@
-package com.skillstorm.cucumber;
+package com.skillstorm.definitions.deletedefinitions;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

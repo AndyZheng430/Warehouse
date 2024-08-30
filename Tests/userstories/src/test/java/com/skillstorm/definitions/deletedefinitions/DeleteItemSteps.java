@@ -1,4 +1,4 @@
-package com.skillstorm.cucumber;
+package com.skillstorm.definitions.deletedefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
