@@ -28,20 +28,7 @@ export const Warehouse = () => {
 			})
 			.catch(error => {console.log(error)});
 	}
-
-	// removes inventory if the item exists in that warehouse
-	const removeInventory = (warehouseId, itemId) => {
-		return warehouses.map(warehouse => {
-			if (warehouseId === warehouse.id) {
-				return {
-					...warehouse,
-					inventory: warehouse.inventory.filter(item => item.item.itemId === itemId)
-				}
-			}
-			return warehouse;
-		});
-	} 
-
+	
 	// delete warehouse request
 	const handleDelete = async (id) => {
 		fetch(import.meta.env.VITE_DELETE_WAREHOUSE+"/"+id, {
@@ -50,14 +37,16 @@ export const Warehouse = () => {
 				"Content-Type": "application/json"
 			}
 		})
-		.then(setWarehouses(warehouses.filter(warehouse => warehouse.id !== id)))
+		.then(console.log("Deleted Warehouse: " + id))
 		.catch(error => {console.log(error)});
+
+		getWarehouses();
 	}
 
 	// display Modal UI for warehouse edit
 	const handleEdit = (warehouse) => {
 		setEditWarehouse(warehouse);
-    setShowWarehouseModal(true);
+		setShowWarehouseModal(true);
 	}
 
 	// delete inventory request
@@ -69,10 +58,11 @@ export const Warehouse = () => {
 			}
 		})
 		.then(() => {
-			const newWarehouses = removeInventory(id1, id2);
-			setWarehouses(newWarehouses)
+			console.log("Deleted Inventory: " + id1 + ", " + id2)
 		})
 		.catch(error => {console.log(error)});
+
+		getWarehouses();
 	}
 
 	return (
