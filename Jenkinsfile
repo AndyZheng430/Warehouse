@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    environment {
+    }
+
     stages{
         stage('Build Frontend'){
             steps{
@@ -69,6 +72,7 @@ pipeline {
         stage('Deploy Backend'){
             steps{
                 env.VERSION = '${env.BUILD_ID}'.toInteger() + 1
+                echo "${env.VERSION}"
                 script{
                   withAWS(region: 'us-east-1', credentials: 'AWS_CREDENTIALS'){
                         sh 'pwd'
