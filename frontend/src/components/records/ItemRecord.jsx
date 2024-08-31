@@ -6,7 +6,7 @@ export const ItemRecord = ({item, handleDelete, handleEdit}) => {
 
 	return (
 		<>
-			<div className={`${classes.record} ${item.id}`}>
+			<div className={`${classes.record} item-${item.id}`}>
 				<div className={classes.check}></div>
 				<div className={`${classes.id} item-id`}>{item.id}</div>
 				<div className={`${classes.name} item-name`}>{item.name}</div>

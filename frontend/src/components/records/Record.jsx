@@ -28,7 +28,7 @@ export const Record = ({warehouse, handleDelete, handleEdit, handleDeleteInvento
 
 	return (
 		<>
-			<div className={`${classes.record} ${warehouse.id}`}>
+			<div className={`${classes.record} warehouse-${warehouse.id}`}>
 				<div className={classes.check}></div>
 				<div className={`${classes.col} warehouse-name`}>{warehouse.name}</div>
 				<div className={`${classes.col} warehouse-owner`}>{warehouse.owner}</div>
