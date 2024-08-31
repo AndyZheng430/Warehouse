@@ -20,7 +20,7 @@ export const Warehouse = () => {
 	
 	// get request for all warehouses
 	const getWarehouses = async () => {
-		fetch(import.meta.env.VITE_GET_WAREHOUSES)
+		await fetch(import.meta.env.VITE_GET_WAREHOUSES)
 			.then(response => response.json())
 			.then(data => {
 				setWarehouses(data);
@@ -31,7 +31,7 @@ export const Warehouse = () => {
 	
 	// delete warehouse request
 	const handleDelete = async (id) => {
-		fetch(import.meta.env.VITE_DELETE_WAREHOUSE+"/"+id, {
+		await fetch(import.meta.env.VITE_DELETE_WAREHOUSE+"/"+id, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json"
@@ -40,6 +40,7 @@ export const Warehouse = () => {
 		.then(console.log("Deleted Warehouse: " + id))
 		.catch(error => {console.log(error)});
 
+		// retrieve warehouses after deleting warehouse
 		getWarehouses();
 	}
 
@@ -51,7 +52,7 @@ export const Warehouse = () => {
 
 	// delete inventory request
 	const handleDeleteInventory = async (id1, id2) => {
-		fetch(import.meta.env.VITE_DELETE_INVENTORY+"/"+id1 + "/"+ id2, {
+		await fetch(import.meta.env.VITE_DELETE_INVENTORY+"/"+id1 + "/"+ id2, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json"
@@ -62,6 +63,7 @@ export const Warehouse = () => {
 		})
 		.catch(error => {console.log(error)});
 
+		// retrieve warehouses after deleting inventory 
 		getWarehouses();
 	}
 
@@ -89,18 +91,16 @@ export const Warehouse = () => {
 				<WarehouseModal 
 					setShowModal={setShowWarehouseModal} 
 					editWarehouse={editWarehouse} 
-					setEditWarehouse={setEditWarehouse} 
 					warehouses={warehouses} 
-					setWarehouses={setWarehouses} 
+					getWarehouses={getWarehouses}
 				/> 
 			}
 			{ showInventoryModal && 
 				<InventoryModal 
 					setShowModal={setShowInventoryModal} 
 					warehouseId={inventoryWarehouseId} 
-					setWarehouseId={setInventoryWarehouseId}
 					inventory={inventoryItem}
-					setInventory={setInventoryItem}
+					getWarehouses={getWarehouses}
 				/> 
 			}
 		</>

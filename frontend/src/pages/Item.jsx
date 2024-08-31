@@ -16,7 +16,7 @@ export const Item = () => {
 
 	// get item requests
 	const getItems = async () => {
-		fetch(import.meta.env.VITE_GET_ITEMS)
+		await fetch(import.meta.env.VITE_GET_ITEMS)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data);
@@ -27,7 +27,7 @@ export const Item = () => {
 
 	// delete item request
 	const handleDelete = async (id) => {
-		fetch(import.meta.env.VITE_DELETE_ITEM+"/"+id, {
+		await fetch(import.meta.env.VITE_DELETE_ITEM+"/"+id, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json"
@@ -64,9 +64,8 @@ export const Item = () => {
 			{showItemModal && <ItemModal 
 				setShowModal={setShowItemModal} 
 				editItem={editItem} 
-				setEditItem={setEditItem} 
 				items={items} 
-				setItems={setItems} 
+				getItems={getItems}
 			/>}
 		</>
 	)
