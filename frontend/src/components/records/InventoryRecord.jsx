@@ -6,15 +6,15 @@ export const InventoryRecord = ({itemId, warehouseId, name, amount, handleDelete
 
 	return (
 		<>
-			<div className={classes.container}>
+			<div className={`${classes.container} ${itemId}-${warehouseId}`}>
 				<div className={classes.details}>
 					<div className="label row">
 						<div className={`${classes.label} ${classes.col4}`}>Name</div>
 						<div className={`${classes.label} ${classes.col4}`}>Quantity</div>
 					</div>
 					<div className="data row" >
-						<div className={`${classes.data} ${classes.col4}`}>{name}</div>
-						<div className={`${classes.data} ${classes.col4}`}>{amount}</div>
+						<div className={`${classes.data} ${classes.col4} inventory-name`}>{name}</div>
+						<div className={`${classes.data} ${classes.col4} inventory-amount`}>{amount}</div>
 					</div>
 				</div>
 				<div className={classes.controls}>
