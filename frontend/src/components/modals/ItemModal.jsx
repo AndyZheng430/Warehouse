@@ -1,7 +1,7 @@
 import classes from './ItemModal.module.css';
 import { useState } from 'react';
 
-export const ItemModal = ({setShowModal, editItem, setEditItem, items, setItems}) => {
+export const ItemModal = ({setShowModal, editItem, items, getItems}) => {
 
   const [message, setMessage] = useState();
   const [error, setError] = useState();
@@ -34,15 +34,12 @@ export const ItemModal = ({setShowModal, editItem, setEditItem, items, setItems}
       })
       .then(data => data.json())
       .then((returnedData) =>{ 
-        const newItems = items?.map(item => item.id === editItem.id ? returnedData : item);
-        setItems(newItems);
-        setEditItem();
-        setMessage("Succesfully updated Item " + editItem.id);
+        console.log(returnedData);
+        setMessage("Succesfully updated Item " + returnedData?.id);
       })
       .catch(err => {
         setError(err);
       });
-      
     } else {
       fetch(import.meta.env.VITE_CREATE_ITEM, {
         method: "POST",
@@ -53,7 +50,6 @@ export const ItemModal = ({setShowModal, editItem, setEditItem, items, setItems}
       })
       .then(data => data.json())
       .then((returnedData) => {
-        setItems([...items, returnedData]);
         console.log(returnedData);
         setMessage("Succesfully created new Item " + returnedData?.name);
       })
@@ -62,6 +58,8 @@ export const ItemModal = ({setShowModal, editItem, setEditItem, items, setItems}
         setError(err);
       });
     }
+    
+    getItems();
   }
 
   return (

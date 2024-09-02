@@ -16,25 +16,27 @@ export const Item = () => {
 
 	// get item requests
 	const getItems = async () => {
-	fetch(import.meta.env.VITE_GET_ITEMS)
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			setItems(data);
-		})
-		.catch(error => {console.log(error)});
+		await fetch(import.meta.env.VITE_GET_ITEMS)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				setItems(data);
+			})
+			.catch(error => {console.log(error)});
 	}
 
-		// delete item request
+	// delete item request
 	const handleDelete = async (id) => {
-			fetch(import.meta.env.VITE_DELETE_ITEM+"/"+id, {
-		method: "DELETE",
-		headers: {
-			"Content-Type": "application/json"
-		}
-	})
-	.then(setItems(items.filter(item => item.id !== id)))
-	.catch(error => {console.log(error)});
+		await fetch(import.meta.env.VITE_DELETE_ITEM+"/"+id, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+		.then(console.log("Deleted " + id))
+		.catch(error => {console.log(error)});
+
+		getItems();
 	}
 
 	// display Modal UI for items
@@ -51,10 +53,20 @@ export const Item = () => {
 			<hr />
 			{items?.length > 0 && items.map(
 				item => (
-					<ItemRecord key={item.id} item={item} handleDelete={() => handleDelete(item.id)} handleEdit={() => handleEdit(item)} />
+					<ItemRecord 
+						key={item.id} 
+						item={item} 
+						handleDelete={() => handleDelete(item.id)} 
+						handleEdit={() => handleEdit(item)} 
+					/>
 				)
 			)}
-			{showItemModal && <ItemModal setShowModal={setShowItemModal} editItem={editItem} setEditItem={setEditItem} items={items} setItems={setItems} />}
+			{showItemModal && <ItemModal 
+				setShowModal={setShowItemModal} 
+				editItem={editItem} 
+				items={items} 
+				getItems={getItems}
+			/>}
 		</>
 	)
 }
