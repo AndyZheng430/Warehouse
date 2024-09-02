@@ -13,13 +13,13 @@
     </classes>
   </test> 
 
-  <test  name="Delete" enabled="false">
+  <test  name="Delete" enabled="true">
     <classes>
       <class name="com.skillstorm.runners.DeleteRunner"/>
     </classes>
   </test> 
   
-  <test  name="Add" enabled="true">
+  <test  name="Add" enabled="false">
     <classes>
       <class name="com.skillstorm.runners.AddRunner"/>
     </classes>

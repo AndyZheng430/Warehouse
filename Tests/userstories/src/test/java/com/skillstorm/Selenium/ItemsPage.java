@@ -32,6 +32,22 @@ public class ItemsPage {
     @FindBy(xpath = "//button[contains(text(),'Submit')]")
     private WebElement submitButton;
 
+    //creating webelements from elements on the warehouse page to be interacted with later
+    @FindBy(xpath = "//a[@href='/warehouses']")
+    private WebElement warehousesLink;
+
+    //delete button for delete an item test
+    @FindBy(xpath = "//*[@id=\"root\"]/main/div/div[7]/div[6]")
+    private WebElement deleteButton;
+
+    //name of item on the item page to be deleted by deleteitem test
+    @FindBy(xpath ="//*[@id=\"root\"]/main/div/div[7]/div[3]")
+    private WebElement itemName;
+
+    //name of item deleted by item deleted test on invntory section
+    @FindBy(xpath ="//*[@id=\"root\"]/main/div/div[8]/div[1]/div[2]/div[1]")
+    private WebElement itemInventoryName;
+
     // constructor for an itempage object
      public ItemsPage(WebDriver driver) {
         this.driver = driver;
@@ -100,7 +116,28 @@ public class ItemsPage {
         submitButton.click();
     }
 
+    //this method will delete the last item on the list named 45lb bumper plate
+    public void clickDelete() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        deleteButton.click();
+    }
 
-
-
+    //this method travels to the warehouse page
+    public void travelWarehouse() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        warehousesLink.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
