@@ -1,7 +1,7 @@
 import classes from './WarehouseModal.module.css';
 import { useState } from 'react';
 
-export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, warehouses, setWarehouses}) => {
+export const WarehouseModal = ({setShowModal, editWarehouse, warehouses, getWarehouses}) => {
 
   const [message, setMessage] = useState();
   const [error, setError] = useState();
@@ -36,9 +36,7 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
       })
       .then(data => data.json())
       .then((returnedData) => {
-        const newWarehouses = warehouses?.map(warehouse => warehouse.id === editWarehouse.id ? returnedData : warehouse);
-        setWarehouses(newWarehouses);
-        setEditWarehouse();
+        console.log(returnedData);
         setMessage("Succesfully updated Warehouse " + returnedData?.name);
       })
       .catch(err => {
@@ -55,7 +53,6 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
       })
       .then(data => data.json())
       .then((returnedData) => {
-        setWarehouses([...warehouses, returnedData]);
         console.log(returnedData);
         setMessage("Succesfully created new Warehouse " + returnedData?.id);
       })
@@ -64,6 +61,8 @@ export const WarehouseModal = ({setShowModal, editWarehouse, setEditWarehouse, w
         setError(err);
       });
     }
+    
+    getWarehouses();
   }
 
   return (

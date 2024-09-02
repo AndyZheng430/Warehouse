@@ -1,7 +1,7 @@
 import classes from './InventoryModal.module.css';
 import { useState } from 'react';
 
-export const InventoryModal = ({setShowModal, warehouseId, setWarehouseId, inventory, setInventory}) => {
+export const InventoryModal = ({setShowModal, warehouseId, inventory, getWarehouses}) => {
 
   const [message, setMessage] = useState();
   const [error, setError] = useState();
@@ -69,9 +69,9 @@ export const InventoryModal = ({setShowModal, warehouseId, setWarehouseId, inven
         console.log(err);
         setError(err);
       });
-
-      setWarehouseId();
     }
+
+    getWarehouses();
   }
 
   return (
