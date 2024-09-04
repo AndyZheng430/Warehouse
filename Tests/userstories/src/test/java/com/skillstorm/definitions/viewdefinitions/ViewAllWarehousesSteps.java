@@ -1,21 +1,22 @@
 package com.skillstorm.definitions.viewdefinitions;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import com.skillstorm.pages.WarehousePage;
+
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-import dev.failsafe.internal.util.Assert;
 
 
 import java.time.Duration;
@@ -25,27 +26,44 @@ import java.util.List;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
+
+//resetDB
+import com.skillstorm.helper.resetDB;
 
 public class ViewAllWarehousesSteps {
 
-    WebDriver warehouseDriver;
-    
+    WebDriver driver;
+    private WarehousePage warehousePage;
 
-    @Given("I am on the {string} page")
-    public void i_am_on_the_page(String string) {
-        FirefoxOptions options = new FirefoxOptions();
+    @Before
+    public void setup(){
+        resetDB.sendPost();
+        //add headless and implicit wait
+        ChromeOptions options = new ChromeOptions();
 
         Duration duration = Duration.of(3, ChronoUnit.SECONDS);
 	    options.setImplicitWaitTimeout(duration);
 
         options.addArguments("-headless");
 
-        //generate driver with options and get items page
-        warehouseDriver = new FirefoxDriver(options);
-        warehouseDriver.get("http://localhost:5173/warehouses");
+        //create new POM object
+        driver = new ChromeDriver(options);
+        this.driver = new ChromeDriver();
+        this.warehousePage = new WarehousePage(driver);
+    }
 
-        WebElement titleParent = warehouseDriver.findElement(By.className("_container_1avss_1"));
+    // Cleanup after test execution
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+    
+    @Given("I am on the {string} page")
+    public void i_am_on_the_page(String string) {
+
+        WebElement titleParent = driver.findElement(By.className("_container_1avss_1"));
         WebElement title = titleParent.findElement(By.className("_title_1avss_15"));
         assertEquals(title.getText(),string);
     }
@@ -55,7 +73,7 @@ public class ViewAllWarehousesSteps {
         // This step assumes that warehouses exist and are displayed on the page.
         // In an actual test environment, you might need to prepopulate the database or mock the backend to ensure warehouses exist.
         
-            Boolean isPresent = warehouseDriver.findElements(By.className("_record_9ratk_1")).size() > 0;
+            Boolean isPresent = driver.findElements(By.className("_record_9ratk_1")).size() > 0;
             assertTrue(isPresent);
         
     }
@@ -63,7 +81,7 @@ public class ViewAllWarehousesSteps {
     @Then("I should see a list of all warehouses created")
     public void iShouldSeeAListOfAllWarehousesCreated() {
         // Verify that the list of warehouses is displayed
-        List<WebElement> warehousesList = warehouseDriver.findElements(By.className("_record_9ratk_1"));
+        List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
         
 
         /* ---------------IMPORTANT------------- */
@@ -74,7 +92,7 @@ public class ViewAllWarehousesSteps {
     @Then("each warehouse should display the warehouse name, owner, location, and maximum capacity")
     public void eachWarehouseShouldDisplayDetails() {
         // Verify that each warehouse item displays the correct details
-        List<WebElement> warehousesList = warehouseDriver.findElements(By.className("_record_9ratk_1"));
+        List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
         for (WebElement warehouse : warehousesList) {
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse name is missing");
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse owner is missing");
@@ -93,15 +111,7 @@ public class ViewAllWarehousesSteps {
         
         /* ---------------IMPORTANT------------- */
         //Change to assertFalse to test empty vs occupied warehouse
-        List<WebElement> warehousesList = warehouseDriver.findElements(By.cssSelector(".warehouse-item"));
+        List<WebElement> warehousesList = driver.findElements(By.cssSelector(".warehouse-item"));
         assertTrue(warehousesList.isEmpty(),"Warehouses list should be empty");
-    }
-
-    // Cleanup after test execution
-    @After
-    public void tearDown() {
-        if (warehouseDriver != null) {
-            warehouseDriver.quit();
-        }
     }
 }

@@ -1,4 +1,4 @@
-package com.skillstorm.Selenium;
+package com.skillstorm.pages;
 
 import java.time.Duration;
 
@@ -14,7 +14,7 @@ public class WarehousePage {
 
     //class fields
 
-     private WebDriver driver;
+    private WebDriver driver;
     private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
 
 
