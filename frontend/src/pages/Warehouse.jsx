@@ -20,7 +20,7 @@ export const Warehouse = () => {
 	
 	// get request for all warehouses
 	const getWarehouses = async () => {
-		fetch(import.meta.env.VITE_GET_WAREHOUSES)
+		await fetch(import.meta.env.VITE_GET_WAREHOUSES)
 			.then(response => response.json())
 			.then(data => {
 				setWarehouses(data);
@@ -28,51 +28,43 @@ export const Warehouse = () => {
 			})
 			.catch(error => {console.log(error)});
 	}
-
-	// removes inventory if the item exists in that warehouse
-	const removeInventory = (warehouseId, itemId) => {
-		return warehouses.map(warehouse => {
-			if (warehouseId === warehouse.id) {
-				return {
-					...warehouse,
-					inventory: warehouse.inventory.filter(item => item.item.itemId === itemId)
-				}
-			}
-			return warehouse;
-		});
-	} 
-
+	
 	// delete warehouse request
 	const handleDelete = async (id) => {
-		fetch(import.meta.env.VITE_DELETE_WAREHOUSE+"/"+id, {
+		await fetch(import.meta.env.VITE_DELETE_WAREHOUSE+"/"+id, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
-		.then(setWarehouses(warehouses.filter(warehouse => warehouse.id !== id)))
+		.then(console.log("Deleted Warehouse: " + id))
 		.catch(error => {console.log(error)});
+
+		// retrieve warehouses after deleting warehouse
+		getWarehouses();
 	}
 
 	// display Modal UI for warehouse edit
 	const handleEdit = (warehouse) => {
 		setEditWarehouse(warehouse);
-    setShowWarehouseModal(true);
+		setShowWarehouseModal(true);
 	}
 
 	// delete inventory request
 	const handleDeleteInventory = async (id1, id2) => {
-		fetch(import.meta.env.VITE_DELETE_INVENTORY+"/"+id1 + "/"+ id2, {
+		await fetch(import.meta.env.VITE_DELETE_INVENTORY+"/"+id1 + "/"+ id2, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
 		.then(() => {
-			const newWarehouses = removeInventory(id1, id2);
-			setWarehouses(newWarehouses)
+			console.log("Deleted Inventory: " + id1 + ", " + id2)
 		})
 		.catch(error => {console.log(error)});
+
+		// retrieve warehouses after deleting inventory 
+		getWarehouses();
 	}
 
 	return (
@@ -99,18 +91,16 @@ export const Warehouse = () => {
 				<WarehouseModal 
 					setShowModal={setShowWarehouseModal} 
 					editWarehouse={editWarehouse} 
-					setEditWarehouse={setEditWarehouse} 
 					warehouses={warehouses} 
-					setWarehouses={setWarehouses} 
+					getWarehouses={getWarehouses}
 				/> 
 			}
 			{ showInventoryModal && 
 				<InventoryModal 
 					setShowModal={setShowInventoryModal} 
 					warehouseId={inventoryWarehouseId} 
-					setWarehouseId={setInventoryWarehouseId}
 					inventory={inventoryItem}
-					setInventory={setInventoryItem}
+					getWarehouses={getWarehouses}
 				/> 
 			}
 		</>

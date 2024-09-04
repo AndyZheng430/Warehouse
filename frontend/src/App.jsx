@@ -15,7 +15,7 @@ function App() {
           <SideNavbar collapse={collapse} setCollapse={setCollapse} />
           <div className={collapse ? "content-minimize" : "content-maximize"} >
             <Routes>
-              <Route path='/'/>
+              <Route path='/' element={<Warehouse />}/>
               <Route path='/warehouses' element={<Warehouse />}/>
               <Route path='/items' element={<Item />} />
             </Routes>
