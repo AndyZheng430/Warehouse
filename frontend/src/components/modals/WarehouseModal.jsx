@@ -25,41 +25,43 @@ export const WarehouseModal = ({setShowModal, editWarehouse, warehouses, getWare
     e.target.reset();
 
     closeModal();
-    
-    if (editWarehouse) {
-      fetch(import.meta.env.VITE_EDIT_WAREHOUSE+"/"+editWarehouse?.id, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(warehouseData)
-      })
-      .then(data => data.json())
-      .then((returnedData) => {
-        console.log(returnedData);
-        setMessage("Succesfully updated Warehouse " + returnedData?.name);
-      })
-      .catch(err => {
-        console.log(err);
-        setError(err);
-      });
-    } else {
-      fetch(import.meta.env.VITE_CREATE_WAREHOUSE, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(warehouseData)
-      })
-      .then(data => data.json())
-      .then((returnedData) => {
-        console.log(returnedData);
-        setMessage("Succesfully created new Warehouse " + returnedData?.id);
-      })
-      .catch(err => {
-        console.log(err);
-        setError(err);
-      });
+
+    if (warehouseData.maxCapacity >= 0) {
+      if (editWarehouse) {
+        fetch(import.meta.env.VITE_EDIT_WAREHOUSE+"/"+editWarehouse?.id, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(warehouseData)
+        })
+        .then(data => data.json())
+        .then((returnedData) => {
+          console.log(returnedData);
+          setMessage("Succesfully updated Warehouse " + returnedData?.name);
+        })
+        .catch(err => {
+          console.log(err);
+          setError(err);
+        });
+      } else {
+        fetch(import.meta.env.VITE_CREATE_WAREHOUSE, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(warehouseData)
+        })
+        .then(data => data.json())
+        .then((returnedData) => {
+          console.log(returnedData);
+          setMessage("Succesfully created new Warehouse " + returnedData?.id);
+        })
+        .catch(err => {
+          console.log(err);
+          setError(err);
+        });
+      }
     }
     
     getWarehouses();
