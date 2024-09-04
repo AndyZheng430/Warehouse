@@ -19,58 +19,59 @@ export const InventoryModal = ({setShowModal, warehouseId, inventory, getWarehou
 
     closeModal();
     
-    if (inventory) {
-      // sets up inventory object
-      const itemData = {
-        warehouseId: inventory.warehouseId,
-        itemId: data.get("itemId"),
-        amount: data.get("amount")
-      }
+    if (data.get("itemId").length < 1) {
+      if (inventory) {
+        // sets up inventory object
+        const itemData = {
+          warehouseId: inventory.warehouseId,
+          itemId: data.get("itemId"),
+          amount: data.get("amount")
+        }
 
-      // send put request to edit inventory
-      fetch(import.meta.env.VITE_EDIT_INVENTORY+"/"+inventory?.warehouseId+"/"+inventory.item.itemId, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(itemData)
-      })
-      .then(data => data.json())
-      .then((returnedData) => {
-        console.log(returnedData);
-        setMessage("Succesfully updated Item " + returnedData?.name);
-      })
-      .catch(err => {
-        console.log(err);
-        setError(err);
-      });
-    } else {
-      // sets up inventory object
-      const itemData = {
-        warehouseId: warehouseId,
-        itemId: data.get("itemId"),
-        amount: data.get("amount")
-      }
+        // send put request to edit inventory
+        fetch(import.meta.env.VITE_EDIT_INVENTORY+"/"+inventory?.warehouseId+"/"+inventory.item.itemId, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(itemData)
+        })
+        .then(data => data.json())
+        .then((returnedData) => {
+          console.log(returnedData);
+          setMessage("Succesfully updated Item " + returnedData?.name);
+        })
+        .catch(err => {
+          console.log(err);
+          setError(err);
+        });
+      } else {
+        // sets up inventory object
+        const itemData = {
+          warehouseId: warehouseId,
+          itemId: data.get("itemId"),
+          amount: data.get("amount")
+        }
 
-      // send post request to create new inventory
-      fetch(import.meta.env.VITE_CREATE_INVENTORY, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(itemData)
-      })
-      .then(data => data.json())
-      .then((returnedData) => {
-        console.log(returnedData);
-        setMessage("Succesfully created new Item " + returnedData?.name);
-      })
-      .catch(err => {
-        console.log(err);
-        setError(err);
-      });
+        // send post request to create new inventory
+        fetch(import.meta.env.VITE_CREATE_INVENTORY, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(itemData)
+        })
+        .then(data => data.json())
+        .then((returnedData) => {
+          console.log(returnedData);
+          setMessage("Succesfully created new Item " + returnedData?.name);
+        })
+        .catch(err => {
+          console.log(err);
+          setError(err);
+        });
+      }
     }
-
     getWarehouses();
   }
 
