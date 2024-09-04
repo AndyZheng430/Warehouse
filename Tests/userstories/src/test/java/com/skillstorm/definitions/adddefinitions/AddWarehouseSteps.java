@@ -4,14 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import java.time.Duration;
-
 import com.skillstorm.Selenium.WarehousePage;
+import com.skillstorm.helper.resetDB;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -23,17 +21,16 @@ import io.cucumber.java.en.When;
 public class AddWarehouseSteps {
     
     private WebDriver driver;
-    private WebDriverWait wait;
 
     private WarehousePage warehousePage;
 
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
-        // options.addArguments("-headless");
+        options.addArguments("-headless");
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         warehousePage = new WarehousePage(driver);
+        resetDB.sendPost();
     }
 
     @After
@@ -51,7 +48,6 @@ public class AddWarehouseSteps {
 
     @When("I click the create button")
     public void clickTheCreateButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),' Create')]")));
         warehousePage.clickCreate();
     }
 
@@ -82,7 +78,6 @@ public class AddWarehouseSteps {
 
     @And("I click the submit button")
     public void clickTheSubmitButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),'Submit')]")));
         warehousePage.clickSubmit();
     }
 
@@ -90,5 +85,11 @@ public class AddWarehouseSteps {
     public void CreateANewWarehouse() {
         Boolean isPresent = driver.findElements(By.xpath("//div[text()='Warehouse']")).size() > 0;
         assertTrue(isPresent);
+    }
+
+    @Then("a new warehouse should not be created")
+    public void warehouseNotCreated() {
+        Boolean isPresent = driver.findElements(By.xpath("//div[text()='Warehouse']")).size() > 0;
+        assertFalse(isPresent);
     }
 }

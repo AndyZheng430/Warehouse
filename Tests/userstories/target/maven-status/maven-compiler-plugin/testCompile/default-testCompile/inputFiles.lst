@@ -1,5 +1,6 @@
 D:\Zheng\Documents\SkillStorm\Warehouse\Tests\userstories\src\test\java\com\skillstorm\definitions\adddefinitions\AddItemSteps.java
 D:\Zheng\Documents\SkillStorm\Warehouse\Tests\userstories\src\test\java\com\skillstorm\definitions\deletedefinitions\deleteInventorySteps.java
+D:\Zheng\Documents\SkillStorm\Warehouse\Tests\userstories\src\test\java\com\skillstorm\helper\resetDB.java
 D:\Zheng\Documents\SkillStorm\Warehouse\Tests\userstories\src\test\java\com\skillstorm\definitions\updatedefinitions\updateWarehouseSteps.java
 D:\Zheng\Documents\SkillStorm\Warehouse\Tests\userstories\src\test\java\com\skillstorm\Selenium\ItemsPage.java
 D:\Zheng\Documents\SkillStorm\Warehouse\Tests\userstories\src\test\java\com\skillstorm\runners\AddRunner.java

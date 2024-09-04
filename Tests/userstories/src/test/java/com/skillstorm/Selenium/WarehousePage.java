@@ -53,6 +53,7 @@ public class WarehousePage {
     @FindBy(id = "inventory-amount")
     public WebElement inventoryAmountField;
 
+    // Modal Submit Button
     @FindBy(xpath = "//button[contains(text(),'Submit')]")
     private WebElement submitButton;
 
