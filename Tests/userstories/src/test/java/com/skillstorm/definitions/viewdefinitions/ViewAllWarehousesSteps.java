@@ -40,14 +40,12 @@ public class ViewAllWarehousesSteps {
         //add headless and implicit wait
         ChromeOptions options = new ChromeOptions();
 
-        Duration duration = Duration.of(3, ChronoUnit.SECONDS);
-	    
-        options.setImplicitWaitTimeout(duration);
+
+        options.setImplicitWaitTimeout(Duration.of(3, ChronoUnit.SECONDS));
         options.addArguments("-headless");
 
         //create new POM object
-        driver = new ChromeDriver(options);
-        this.driver = new ChromeDriver();
+        this.driver = new ChromeDriver(options);
         this.warehousePage = new WarehousePage(driver);
     }
 

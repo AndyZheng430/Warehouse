@@ -16,8 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
@@ -36,38 +34,24 @@ public class ViewAllItemsSteps {
         ResetDB.sendPost();
         //add headless and implicit wait
         ChromeOptions options = new ChromeOptions();
-
-        Duration duration = Duration.of(3, ChronoUnit.SECONDS);
-	    
-        options.setImplicitWaitTimeout(duration);
+        options.setImplicitWaitTimeout(Duration.of(3, ChronoUnit.SECONDS));
         options.addArguments("-headless");
 
         //create new POM object
-        driver = new ChromeDriver(options);
-        this.driver = new ChromeDriver();
-        this.warehousePage = new WarehousePage(driver);
+        this.driver = new ChromeDriver(options);
+        this.warehousePage = new WarehousePage(this.driver);
     }
 
     @After
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+        if (this.driver != null) {
+            this.driver.quit();
         }
     }
 
     @Given("I am at the {string} page")
     public void i_am_on_the_landing_page(String string) {
-        FirefoxOptions options = new FirefoxOptions();
 
-        Duration duration = Duration.of(3, ChronoUnit.SECONDS);
-	    options.setImplicitWaitTimeout(duration);
-
-        options.addArguments("-headless");
-
-        //generate driver with options and get items page
-        driver = new FirefoxDriver(options);
-        driver.get("http://localhost:5173/items");
-        
         //find element with class _container_1avss_1
         //then find subset element within it and then get the text
         WebElement titleParent = driver.findElement(By.className("_container_1avss_1"));

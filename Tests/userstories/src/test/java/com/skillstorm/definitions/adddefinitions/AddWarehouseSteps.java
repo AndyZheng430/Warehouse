@@ -8,6 +8,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
 import com.skillstorm.pages.WarehousePage;
 import com.skillstorm.helper.ResetDB;
 
@@ -27,9 +30,10 @@ public class AddWarehouseSteps {
     @Before
     public void before() {
         ChromeOptions options = new ChromeOptions();
+        options.setImplicitWaitTimeout(Duration.of(3, ChronoUnit.SECONDS));
         options.addArguments("-headless");
-        driver = new ChromeDriver(options);
-        warehousePage = new WarehousePage(driver);
+        this.driver = new ChromeDriver(options);
+        this.warehousePage = new WarehousePage(this.driver);
         ResetDB.sendPost();
     }
 
