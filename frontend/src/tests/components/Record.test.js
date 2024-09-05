@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent} from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'; 
 import { Record } from '../../components/records/Record';
 
@@ -59,6 +59,33 @@ describe(Record,()=>{
         fireEvent.click(displayButton);
   
         expect(displayButton).toBeInTheDocument();
+      });
+
+      it('should call handleDelete function upon clicking the delete button', () => {
+        const warehouse = { id: 1, name: 'Warehouse 1', owner: 'Owner 1', location: 'Location 1', maxCapacity: 100, inventory: [] };
+        const setShowInventoryModal = jest.fn();
+        const setInventoryWarehouseId = jest.fn();
+        const setInventoryItem = jest.fn();
+        const handleDelete = jest.fn();
+        const handleEdit = jest.fn();
+        const handleDeleteInventory = jest.fn();
+  
+        render(
+          <Record 
+            warehouse={warehouse} 
+            handleDelete={handleDelete} 
+            handleEdit={handleEdit} 
+            handleDeleteInventory={handleDeleteInventory} 
+            setShowInventoryModal={setShowInventoryModal} 
+            setInventoryWarehouseId={setInventoryWarehouseId} 
+            setInventoryItem={setInventoryItem} 
+          />
+        );
+  
+        const deleteButton = screen.getByLabelText('delete');
+        fireEvent.click(deleteButton);
+  
+        expect(handleDelete).toHaveBeenCalledTimes(1);
       });
 
 

@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1725502390890" clover="3.2.0">
-  <project timestamp="1725502390890" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="3" coveredelements="3" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
-    <file name="InventoryRecord.jsx" path="C:\p2\Warehouse\frontend\src\components\records\InventoryRecord.jsx">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="5" count="1" type="stmt"/>
-      <line num="7" count="1" type="stmt"/>
-    </file>
+<coverage generated="1725574501671" clover="3.2.0">
+  <project timestamp="1725574501671" name="All files">
+    <metrics statements="21" coveredstatements="12" conditionals="7" coveredconditionals="4" methods="11" coveredmethods="4" elements="39" coveredelements="20" complexity="0" loc="21" ncloc="21" packages="2" files="4" classes="4"/>
+    <package name="header">
+      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="Header.jsx" path="C:\p2\Warehouse\frontend\src\components\header\Header.jsx">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="records">
+      <metrics statements="18" coveredstatements="10" conditionals="7" coveredconditionals="4" methods="9" coveredmethods="3"/>
+      <file name="InventoryRecord.jsx" path="C:\p2\Warehouse\frontend\src\components\records\InventoryRecord.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+      <file name="ItemRecord.jsx" path="C:\p2\Warehouse\frontend\src\components\records\ItemRecord.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+      <file name="Record.jsx" path="C:\p2\Warehouse\frontend\src\components\records\Record.jsx">
+        <metrics statements="14" coveredstatements="6" conditionals="5" coveredconditionals="3" methods="7" coveredmethods="1"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>

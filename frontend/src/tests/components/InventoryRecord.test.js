@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent} from '@testing-library/react';
+import { render, fireEvent, screen} from '@testing-library/react';
 import '@testing-library/jest-dom'; 
 import { InventoryRecord } from '../../components/records/InventoryRecord';
 
@@ -24,4 +24,21 @@ describe(InventoryRecord,() =>{
         expect(inventoryDiv).toBeInTheDocument();
     });
 
+
+    it('should call handleDelete when delete icon is clicked', () => {
+        const handleDeleteMock = jest.fn();
+        render(
+            <InventoryRecord 
+                itemId="1" 
+                warehouseId="101" 
+                name="Item A" 
+                amount="50" 
+                handleDelete={handleDeleteMock} 
+                handleEdit={() => {}} 
+            />
+        );
+            const deletebutton = screen.getByLabelText('delete')
+        fireEvent.click(deletebutton);
+        expect(handleDeleteMock).toHaveBeenCalled();
+    });
 })
