@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom'; 
 import { InventoryRecord } from '../../components/records/InventoryRecord';
 
@@ -22,9 +23,5 @@ describe(InventoryRecord,() =>{
         const inventoryDiv = container.querySelector('.inventory-123-456');
         expect(inventoryDiv).toBeInTheDocument();
     });
-
-
-
-
 
 })
