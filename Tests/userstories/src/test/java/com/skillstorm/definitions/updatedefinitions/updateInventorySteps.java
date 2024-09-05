@@ -22,13 +22,13 @@ import java.util.Map;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
-public class updateInventorySteps {
+public class UpdateInventorySteps {
     
     WebDriver driver;
     WebDriverWait wait;
     WebElement clicktoEdit;
 
-    public updateInventorySteps() {
+    public UpdateInventorySteps() {
         // Initialize WebDriver instance
         FirefoxOptions options = new FirefoxOptions();
 

@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-public class updateWarehouseSteps {
+public class UpdateWarehouseSteps {
     WebDriver driver;
 
     @Given("I am on the {string} page")

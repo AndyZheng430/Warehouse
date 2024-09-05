@@ -17,12 +17,12 @@ import java.time.Duration;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
-public class updateitemSteps {
+public class UpdateItemSteps {
     
     WebDriver driver;
     WebDriverWait wait;
 
-    public updateitemSteps() {
+    public UpdateItemSteps() {
         // Initialize WebDriver instance
         this.driver = new FirefoxDriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
