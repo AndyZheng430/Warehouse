@@ -6,7 +6,7 @@ import java.net.URL;
 public class resetDB {
     
         public static void sendPost() {
-        String resetDataURI = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/test/resetDB";
+        String resetDataURI = "http://team8-backend-env.eba-utzyzrwp.us-east-1.elasticbeanstalk.com/test/resetDB";
         try {
             // URL to send the POST request to
             URL url = new URL(resetDataURI);

@@ -22,6 +22,8 @@ public class WarehousePage {
     @FindBy(xpath = "//a[@href='/warehouses']")
     private WebElement warehousesLink;
 
+    @FindBy(xpath = "//button[contains(text(),' Create')]")
+    private WebElement createButton;
 
     //delete button for delete warehouse button needed for delete warehouse test
     @FindBy(xpath ="//*[@id=\"root\"]/main/div/div[6]/div[8]")
@@ -30,6 +32,30 @@ public class WarehousePage {
     //name field for warehouse used to validate deletion
     @FindBy(xpath = "//*[@id=\"root\"]/main/div/div[6]/div[2]")
     private WebElement warehouseName;
+
+    // Warehouse Modal Fields
+    @FindBy(id = "warehouse-name")
+    public WebElement warehouseNameField;
+
+    @FindBy(id = "warehouse-owner")
+    public WebElement warehouseOwnerField;
+
+    @FindBy(id = "warehouse-location")
+    public WebElement warehouseLocationField;
+
+    @FindBy(id = "warehouse-capacity")
+    public WebElement warehouseCapacityField;
+
+    // Inventory Modal Fields
+    @FindBy(id = "item-id")
+    public WebElement itemIdField;
+
+    @FindBy(id = "inventory-amount")
+    public WebElement inventoryAmountField;
+
+    // Modal Submit Button
+    @FindBy(xpath = "//button[contains(text(),'Submit')]")
+    private WebElement submitButton;
 
     //class constructor
     public WarehousePage(WebDriver driver) {
@@ -69,4 +95,83 @@ public class WarehousePage {
         deleteButton.click();
     }
 
+    // click on Create button 
+    public void clickCreate() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        createButton.click();
+    }
+
+    // set warehouse name field in Warehouse Modal
+    public void setWarehouseNameField(String name) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        warehouseNameField.sendKeys(name);
+    }
+
+    // set warehouse owner field in Warehouse modal 
+    public void setWarehouseOwner(String name) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        warehouseOwnerField.sendKeys(name);
+    }
+
+    // set warehouse location field in Warehouse modal 
+    public void setWarehouseLocation(String location) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        warehouseLocationField.sendKeys(location);
+    }
+
+    // set warehouse capacity field in Warehouse modal 
+    public void setWarehouseCapacity(String amount) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        warehouseCapacityField.sendKeys(amount);
+    }
+
+    // set inventory item id field in Warehouse modal 
+    public void setItemId(String id) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        itemIdField.sendKeys(id);
+    }
+
+    // set inventory amount field in Warehouse modal
+    public void setInventoryAmount(String amount) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        inventoryAmountField.sendKeys(amount);
+    }
+
+    // click on Warehouse or Inventory modal submit button 
+    public void clickSubmit() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        submitButton.click();
+    }
 }
