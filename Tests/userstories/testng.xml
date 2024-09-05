@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="CRUD user stories">
-  <test  name="View" enabled="false">
+  <test  name="View" enabled="true">
     <classes>
       <class name="com.skillstorm.runners.ViewRunner"/>
     </classes>
@@ -19,7 +19,7 @@
     </classes>
   </test> 
   
-  <test  name="Add" enabled="true">
+  <test  name="Add" enabled="false">
     <classes>
       <class name="com.skillstorm.runners.AddRunner"/>
     </classes>

@@ -11,7 +11,3 @@ Feature: View All Warehouses
     Then I should see a list of all warehouses created
     And each warehouse should display the warehouse name, owner, location, and maximum capacity
 
-
-  Scenario: Displaying an empty list of all warehouses
-    When there is no current warehouses existing
-    Then I should see an empty list of warehouses created

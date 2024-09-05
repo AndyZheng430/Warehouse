@@ -1,20 +1,20 @@
 package com.skillstorm.definitions.deletedefinitions;
 
+import com.skillstorm.pages.WarehousePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import com.skillstorm.Selenium.WarehousePage;
-
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 public class DeleteWarehouseSteps {
     

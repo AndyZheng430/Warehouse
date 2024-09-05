@@ -1,4 +1,4 @@
-package com.skillstorm.Selenium;
+package com.skillstorm.pages;
 
 import java.time.Duration;
 

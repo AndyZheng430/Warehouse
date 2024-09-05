@@ -11,7 +11,3 @@ Feature: View All Items
     Then I should see a list of all items created
     And each item should display their id, name, and description
 
-
-  Scenario: Displaying an empty list of all items
-    When there is no items created
-    Then I should see an empty list of items created

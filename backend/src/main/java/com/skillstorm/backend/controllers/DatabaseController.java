@@ -28,14 +28,14 @@ import java.nio.file.Paths;
 @RequestMapping("/test")
 @CrossOrigin
 public class DatabaseController {
-      @Autowired
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
     private ResourceLoader resourceLoader;
 
     @PostMapping("/resetDB")
-    public ResponseEntity<String> executeSqlScript() {
+    public ResponseEntity<String> resetDB() {
         try {
             // Load SQL 
             Resource resource = resourceLoader.getResource("classpath:sql/data.sql");
@@ -59,4 +59,5 @@ public class DatabaseController {
                                  .body("Error executing SQL script: " + e.getMessage());
         }
     }
+
 }
