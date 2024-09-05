@@ -28,7 +28,7 @@ import java.nio.file.Paths;
 @RequestMapping("/test")
 @CrossOrigin
 public class DatabaseController {
-      @Autowired
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
