@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import com.skillstorm.Selenium.WarehousePage;
+import com.skillstorm.pages.WarehousePage;
 import com.skillstorm.helper.resetDB;
 
 import io.cucumber.java.After;
