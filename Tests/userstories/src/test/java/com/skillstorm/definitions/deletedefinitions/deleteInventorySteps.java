@@ -15,12 +15,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 
-public class deleteInventorySteps {
+public class DeleteInventorySteps {
     
     WebDriver driver;
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

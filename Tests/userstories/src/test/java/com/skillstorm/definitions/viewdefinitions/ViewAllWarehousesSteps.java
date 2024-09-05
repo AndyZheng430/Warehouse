@@ -26,7 +26,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 //resetDB
-import com.skillstorm.helper.resetDB;
+import com.skillstorm.helper.ResetDB;
 
 public class ViewAllWarehousesSteps {
 
@@ -35,13 +35,14 @@ public class ViewAllWarehousesSteps {
 
     @Before
     public void setup(){
-        resetDB.sendPost();
+
+        ResetDB.sendPost();
         //add headless and implicit wait
         ChromeOptions options = new ChromeOptions();
 
         Duration duration = Duration.of(3, ChronoUnit.SECONDS);
-	    options.setImplicitWaitTimeout(duration);
-
+	    
+        options.setImplicitWaitTimeout(duration);
         options.addArguments("-headless");
 
         //create new POM object
@@ -73,14 +74,12 @@ public class ViewAllWarehousesSteps {
         
             Boolean isPresent = driver.findElements(By.className("_record_9ratk_1")).size() > 0;
             assertTrue(isPresent);
-        
     }
 
     @Then("I should see a list of all warehouses created")
     public void iShouldSeeAListOfAllWarehousesCreated() {
         // Verify that the list of warehouses is displayed
         List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
-        
 
         /* ---------------IMPORTANT------------- */
         //Change to assertTrue to test empty vs occupied warehouse

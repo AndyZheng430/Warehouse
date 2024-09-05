@@ -9,7 +9,7 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import com.skillstorm.pages.WarehousePage;
-import com.skillstorm.helper.resetDB;
+import com.skillstorm.helper.ResetDB;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -30,7 +30,7 @@ public class AddWarehouseSteps {
         options.addArguments("-headless");
         driver = new ChromeDriver(options);
         warehousePage = new WarehousePage(driver);
-        resetDB.sendPost();
+        ResetDB.sendPost();
     }
 
     @After

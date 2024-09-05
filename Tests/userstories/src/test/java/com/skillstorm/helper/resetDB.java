@@ -3,7 +3,7 @@ package com.skillstorm.helper;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class resetDB {
+public class ResetDB {
     
         public static void sendPost() {
         String resetDataURI = "http://team8-backend-env.eba-utzyzrwp.us-east-1.elasticbeanstalk.com/test/resetDB";
