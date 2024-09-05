@@ -60,29 +60,4 @@ public class DatabaseController {
         }
     }
 
-    @PostMapping("/clearDB")
-    public ResponseEntity<String> clearDB() {
-        try {
-            // Load SQL 
-            Resource resource = resourceLoader.getResource("classpath:sql/reset.sql");
-
-            // Read into script
-            String sql = new String(Files.readAllBytes(Paths.get(resource.getURI())));
-
-            // Split each line on ';'
-            String[] sqlStatements = sql.split(";");
-
-            //execute
-            for (String statement : sqlStatements) {
-                if (!statement.trim().isEmpty()) {
-                    jdbcTemplate.execute(statement);
-                }
-            }
-
-            return ResponseEntity.ok("SQL script executed successfully.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("Error executing SQL script: " + e.getMessage());
-        }
-    }
 }
