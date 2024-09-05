@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 //need for file grabbing
 import java.nio.file.Files;
 import java.nio.file.Paths; 
-
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/test")
@@ -36,12 +39,23 @@ public class DatabaseController {
 
     @PostMapping("/resetDB")
     public ResponseEntity<String> resetDB() {
+        String sql;
         try {
             // Load SQL 
-            Resource resource = resourceLoader.getResource("classpath:sql/data.sql");
+  // Use the class loader to get the resource as an InputStream
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data.sql");
+            
 
-            // Read into script
-            String sql = new String(Files.readAllBytes(Paths.get(resource.getURI())));
+        if (inputStream == null) {
+            throw new IllegalArgumentException("File not found!");
+        } else {
+            // Convert the InputStream to a String
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
+                sql =  reader.lines().collect(Collectors.joining("\n"));
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to read the file", e);
+            }
+        }
 
             // Split each line on ';'
             String[] sqlStatements = sql.split(";");
@@ -52,7 +66,7 @@ public class DatabaseController {
                     jdbcTemplate.execute(statement);
                 }
             }
-
+            
             return ResponseEntity.ok("SQL script executed successfully.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
