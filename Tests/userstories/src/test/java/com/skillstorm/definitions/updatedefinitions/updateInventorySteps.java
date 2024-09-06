@@ -1,23 +1,24 @@
 package com.skillstorm.definitions.updatedefinitions;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.Before;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.skillstorm.pages.WarehousePage;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
@@ -27,48 +28,44 @@ public class UpdateInventorySteps {
     WebDriver driver;
     WebDriverWait wait;
     WebElement clicktoEdit;
+    private WarehousePage warehousePage;
 
-    public UpdateInventorySteps() {
+    @Before
+    public void setup() {
         // Initialize WebDriver instance
-        FirefoxOptions options = new FirefoxOptions();
+        ChromeOptions options = new ChromeOptions();
 
-        Duration duration = Duration.of(3, ChronoUnit.SECONDS);
-	    options.setImplicitWaitTimeout(duration);
-
+        options.setImplicitWaitTimeout(Duration.of(3, ChronoUnit.SECONDS));
         options.addArguments("-headless");
         
         //options.addArguments("-headless");
-        this.driver = new FirefoxDriver(options);
+        this.driver = new ChromeDriver(options);
+        this.warehousePage = new WarehousePage( this.driver);
     }
 
     @Given("I am on {string} page")
     public void i_am_on_the_warehouses_page(String string) {
-        driver.get("http://localhost:5173/warehouses"); 
-        WebElement titleParent = driver.findElement(By.className("_container_1avss_1"));
-        WebElement title = titleParent.findElement(By.className("_title_1avss_15"));
-        assertEquals(title.getText(),string);
+        
+        this.warehousePage.getMain();
+        assertEquals(this.warehousePage.getTitle(),string);
     }
 
     @And("I have existing warehouse with the following details:")
-    public void i_expand_a_warehouse_s_details(List<Map<String,String>> detailsTable) {
-        Map<String, String> woodshopData = new HashMap<>();
+    public void i_expand_a_warehouse_s_details(Map<String,String> detailsTable) {
 
-        // Find and store data related to "Woodshop"
-        for (Map<String, String> map : detailsTable) {
-            String name = map.get("Name");
-            if ("Woodshop".equals(name)) {
-                woodshopData.putAll(map);
-                break; // Assuming there's only one Woodshop entry
-            }
-        }
+        String name = detailsTable.get("Name")
+        String location = detailsTable.get("Location");
+        String owner = detailsTable.get("Owner");
+        String capacity = detailsTable.get("Capacity");
 
-        clicktoEdit = driver.findElement(By.xpath("//div[text()='" + woodshopData.get("Name") + 
-        "']/ancestor::div[contains(@class, '_record_9ratk_1')]//div[contains(@class, '_edit_9ratk_71')]"));
+        assertTrue(warehousePage.findWarehouse(name, location, owner, capacity));
     }
 
     @When("I click to edit item:")
-    public void i_click_to_edit_an_item(List<Map<String,String>> details) {
-        clicktoEdit.click();
+    public void i_click_to_edit_an_item(Map<String,String> details) {
+        WebElement row = driver.findElement(By.className("inventory-1-1"));
+        WebElement editButton = row.findElement(By.className("undefined _option_do5oz_77"));
+        editButton.click();
     }
 
     @Then("a window should display the item Id {string} and amount {string}")

@@ -27,7 +27,7 @@ public class UpdateWarehouseSteps {
 
         //generate driver with options and get items page
         driver = new FirefoxDriver(options);
-        driver.get("http://localhost:5173/warehouses");
+        driver.get("http://localhost:4173/warehouses");
 
         WebElement titleParent = driver.findElement(By.className("_container_1avss_1"));
         WebElement title = titleParent.findElement(By.className("_title_1avss_15"));

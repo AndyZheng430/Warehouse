@@ -40,7 +40,6 @@ public class ViewAllWarehousesSteps {
         //add headless and implicit wait
         ChromeOptions options = new ChromeOptions();
 
-
         options.setImplicitWaitTimeout(Duration.of(3, ChronoUnit.SECONDS));
         options.addArguments("-headless");
 
@@ -59,54 +58,37 @@ public class ViewAllWarehousesSteps {
     
     @Given("I am on the {string} page")
     public void i_am_on_the_page(String string) {
-
-        WebElement titleParent = driver.findElement(By.className("_container_1avss_1"));
-        WebElement title = titleParent.findElement(By.className("_title_1avss_15"));
-        assertEquals(title.getText(),string);
+        this.warehousePage.getMain();
+        
+        assertEquals(this.warehousePage.getTitle(),string);
     }
 
     @When("there is one or more warehouses existing")
     public void thereIsOneOrMoreWarehousesExisting() {
         // This step assumes that warehouses exist and are displayed on the page.
         // In an actual test environment, you might need to prepopulate the database or mock the backend to ensure warehouses exist.
-        
-            Boolean isPresent = driver.findElements(By.className("_record_9ratk_1")).size() > 0;
-            assertTrue(isPresent);
+
+            assertTrue(this.warehousePage.warehousesExist());
     }
 
     @Then("I should see a list of all warehouses created")
     public void iShouldSeeAListOfAllWarehousesCreated() {
         // Verify that the list of warehouses is displayed
-        List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
+        List<WebElement> warehouses = this.warehousePage.getWarehouses();
 
         /* ---------------IMPORTANT------------- */
         //Change to assertTrue to test empty vs occupied warehouse
-        assertFalse(warehousesList.isEmpty(),"Warehouses list should not be empty");
     }
 
     @Then("each warehouse should display the warehouse name, owner, location, and maximum capacity")
     public void eachWarehouseShouldDisplayDetails() {
         // Verify that each warehouse item displays the correct details
-        List<WebElement> warehousesList = driver.findElements(By.className("_record_9ratk_1"));
+        List<WebElement> warehousesList = this.warehousePage.getWarehouses();
         for (WebElement warehouse : warehousesList) {
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse name is missing");
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse owner is missing");
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse location is missing");
             assertTrue(warehouse.findElement(By.className("_col_9ratk_23")).isDisplayed(), "Warehouse maximum capacity is missing");
         }
-    }
-
-    @When("there is no current warehouses existing")
-    public void thereIsNoCurrentWarehousesExisting() {
-        assertTrue(true);
-    }
-
-    @Then("I should see an empty list of warehouses created")
-    public void iShouldSeeAnEmptyListOfWarehousesCreated() {
-        
-        /* ---------------IMPORTANT------------- */
-        //Change to assertFalse to test empty vs occupied warehouse
-        List<WebElement> warehousesList = driver.findElements(By.cssSelector(".warehouse-item"));
-        assertTrue(warehousesList.isEmpty(),"Warehouses list should be empty");
     }
 }

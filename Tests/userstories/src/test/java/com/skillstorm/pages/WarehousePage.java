@@ -1,9 +1,14 @@
 package com.skillstorm.pages;
 
-import java.time.Duration;
+import static org.testng.Assert.assertTrue;
 
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,10 +20,16 @@ public class WarehousePage {
     //class fields
 
     private WebDriver driver;
-    private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
+    //aws
+    //private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
 
+    //local
+    private static final String url = "http://localhost:4173/warehouses";
 
     //creating webelements from elements on the warehouse page to be interacted with later
+    @FindBy(className = "_title_1avss_15")
+    private WebElement warehousesTitle;
+    
     @FindBy(xpath = "//a[@href='/warehouses']")
     private WebElement warehousesLink;
 
@@ -57,6 +68,10 @@ public class WarehousePage {
     @FindBy(xpath = "//button[contains(text(),'Submit')]")
     private WebElement submitButton;
 
+    //findelements 
+    @FindBy(className = "_record_9ratk_1")
+    private List<WebElement> allWarehouses;
+
     //class constructor
     public WarehousePage(WebDriver driver) {
         this.driver = driver;
@@ -64,7 +79,17 @@ public class WarehousePage {
         PageFactory.initElements(driver, this);
     }
 
+    //check to see if we have any warehouses existing
+    public List<WebElement> getWarehouses(){
+        return allWarehouses;
+    }
+    public boolean warehousesExist(){
+        return allWarehouses.size() > 0;
+    }
 
+    public String getTitle(){
+        return warehousesTitle.getText();
+    }
     //this method takes you to the main page of our application
     public void getMain() {
         try {
@@ -75,6 +100,16 @@ public class WarehousePage {
         this.driver.get(url);
     }
 
+    public boolean findWarehouse(String name, String location, String owner, String capacity ){
+
+        WebElement row = driver.findElement(By.className("warehouse-1"));
+        assertTrue(row.findElements(By.xpath("//div[contains(text(),'" + name + "')]")).size() > 0);
+        assertTrue(row.findElements(By.xpath("//div[contains(text(),'" + location + "')]")).size() > 0);
+        assertTrue(row.findElements(By.xpath("//div[contains(text(),'" + owner + "')]")).size() > 0);
+        assertTrue(row.findElements(By.xpath("//div[contains(text(),'" + capacity + "')]")).size() > 0);
+
+        return true;
+    }
     //this method travels to the warehouse page
     public void travelWarehouse() {
         try {
