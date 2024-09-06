@@ -22,6 +22,7 @@ import java.util.*;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 public class UpdateInventorySteps {
     
@@ -43,6 +44,11 @@ public class UpdateInventorySteps {
         this.warehousePage = new WarehousePage( this.driver);
     }
 
+    /*
+     * =================
+     * BACKGROUND
+     * =================
+     */
     @Given("I am on {string} page")
     public void i_am_on_the_warehouses_page(String string) {
         
@@ -60,20 +66,38 @@ public class UpdateInventorySteps {
 
         assertTrue(warehousePage.findWarehouse(name, location, owner, capacity));
     }
-
-    @When("I click to edit item:")
-    public void i_click_to_edit_an_item(Map<String,String> details) {
+    //===========================
+    //Scenario 1
+    //===========================
+    @Given("I click the inventory item")
+    public void i_click_to_edit_an_item() {
         WebElement row = driver.findElement(By.className("inventory-1-1"));
-        WebElement editButton = row.findElement(By.className("undefined _option_do5oz_77"));
+        WebElement editButton = row.findElement(By.className("_option_do5oz_77"));
         editButton.click();
     }
 
-    @Then("a window should display the item Id {string} and amount {string}")
+    @When("I enter new inventory info:")
+    public void i_enter_new_inventory_info(Map<String,String> updatedData){
+        
+        String name = updatedData.get("Name");
+        String location = updatedData.get("Quantity");
+
+
+        WebElement itemIdInput = driver.findElement(By.id("item-id"));
+        WebElement AmountInput = driver.findElement(By.id("inventory-amount"));
+
+        itemIdInput.clear();
+        AmountInput.clear();
+
+        itemIdInput.sendKeys(name);
+        AmountInput.sendKeys(location);
+        assertTrue(true);
+    }
+
+    @Then("the main screen should display the item Id {string} and amount {string}")
     public void a_window_should_display_the_item_id_and_amount(String string, String string2) {
-        // WebElement itemId = driver.findElement(By.id("item-id"));
-        // WebElement itemQuantity = driver.findElement(By.id("inventory-amount"));
-        // assertTrue(itemId.isDisplayed(), "Item name should be displayed.");
-        // assertTrue(itemQuantity.isDisplayed(), "Item quantity should be displayed.");
+        assertTrue(driver.findElements(By.xpath("//div[contains(text(), '"+ string + "')]")).size() > 0);
+        assertTrue(driver.findElements(By.xpath("//div[contains(text(), '"+ string + "')]")).size() > 0);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -88,33 +112,52 @@ public class UpdateInventorySteps {
     @Given("I click to edit item named {string}")
     public void i_click_to_edit_item_named(String itemName) {
 
-        driver.findElement(By.xpath("//div[text()='" + "Woodshop" + 
-        "']/ancestor::div[contains(@class, '_record_9ratk_1')]//div[contains(@class, '_option_9ratk_111')]")).click();
-
-        WebElement expandEditButton = driver.findElement(By.xpath("//div[text()='" + itemName + 
-        "']/ancestor::div[contains(@class, '_record_9ratk_1')]//div[contains(@class, '_edit_9ratk_71') and contains(@class, '_option_9ratk_39')]"));
-        expandEditButton.click();
+        WebElement row = driver.findElement(By.className("warehouse-1"));
+        WebElement clickable = row.findElement(By.tagName("svg"));
+        clickable.click();
     }
 
     @When("I change the inventory item Id to {string}")
     public void i_change_the_inventory_item_id_to(String newItemId) {
-        WebElement itemIdField = driver.findElement(By.id("item-id"));
+        WebElement itemIdField = driver.findElement(By.name("itemId"));
         itemIdField.clear();
         itemIdField.sendKeys(newItemId);
     }
 
-    @And("I change the quantity to {string}")
-    public void i_change_the_quantity_to(String newQuantity) {
-        WebElement quantityField = driver.findElement(By.id("inventory-quantity"));
-        quantityField.clear();
-        quantityField.sendKeys(newQuantity);
+    @Then("the item name should be updated to:")
+    public void the_item_name_should_be_updated_to(Map<String,String> details) {
+        String name = details.get("Name");
+        assertTrue(driver.findElements(By.xpath("//div[contains(text(), '"+ name + "')]")).size() > 0);
     }
 
-    @Then("the item name should be updated to:")
-    public void the_item_name_should_be_updated_to(List<Map<String,String>> details) {
-        // WebElement itemName = driver.findElement(By.id("item-name"));
-        // assertEquals(details, itemName.getText(), "Item name should be updated.");
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    /*
+     * 
+     * SECOND SCENARIO
+     * 
+     */
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    
+    @Given("I click to edit the item named {string}")
+    public void i_click_to_edit_the_item_named(String itemName) {
+
+        WebElement row = driver.findElement(By.className("warehouse-1"));
+        WebElement clickable = row.findElement(By.tagName("svg"));
+        clickable.click();
     }
+    
+    @When("I change the amount to {string}")
+    public void i_change_the_quantity_to(String newQuantity) {
+        WebElement amountField = driver.findElement(By.name("amount"));
+        amountField.clear();
+        amountField.sendKeys(newQuantity);
+    }
+    @Then("the amount should be updated to:")
+    public void the_amount_updated_to(Map<String,String> update){
+        String amount = update.get("Amount");
+        assertFalse(driver.findElements(By.xpath("//div[contains(text(), '"+ amount + "')]")).size() > 0);
+    }
+
 
     //OOS
 

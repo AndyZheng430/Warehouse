@@ -1,4 +1,4 @@
-
+@testing
 Feature: Update Item
 
   As a user,
@@ -9,16 +9,14 @@ Feature: Update Item
     Given I am at the "Item" page
 
   Scenario: Verify successful update of all fields of an Item
-    Given I have an existing item with ID "123" and the following details:
-      | Name        | Description           |
-      | Old Product | Old Product Description |
-    When I click the "Edit" button for the item with ID "123"
-    And I update the Name to "New Product"
-    And I update the Description to "New Product Description"
-    And I click the "Save" button
+    Given I have an existing item with ID "3" 
+    When I click the "Edit" button for the item with ID "3"
+    And I update the Name to "Birch Wood "
+    And I update the Description to "pliable"
+    And I click the submit button
     Then I should see the updated item details in the table:
-      | Name         | Description            |
-      | New Product  | New Product Description |
+      | Name        | Birch Wood |
+      | Description | pliable    |
 
   # Scenario: Verify partial update of an Item
   #   Given I have an existing item with ID "123" and the following details:

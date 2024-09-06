@@ -6,7 +6,7 @@ import java.net.URL;
 public class ResetDB {
     
         public static void sendPost() {
-        String resetDataURI = "http://localhost:8080/test/resetdb";
+        String resetDataURI = "http://localhost:8080/resetdb";
         try {
             // URL to send the POST request to
             URL url = new URL(resetDataURI);

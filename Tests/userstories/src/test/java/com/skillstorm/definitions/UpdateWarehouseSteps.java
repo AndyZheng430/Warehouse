@@ -1,4 +1,4 @@
-package com.skillstorm.definitions.updatedefinitions;
+package com.skillstorm.definitions;
 
 import io.cucumber.java.en.*;
 
