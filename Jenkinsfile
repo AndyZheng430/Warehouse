@@ -115,5 +115,9 @@ pipeline {
                 }   
             }
         }
+         stage('Run JMeter Tests') {
+            steps {
+                sh '/opt/jmeter/bin/jmeter -n -t /opt/TestPlans/Test_Plan.jmx -l /opt/TestPlansTest.report.jtl'
+            }
     }
 }
