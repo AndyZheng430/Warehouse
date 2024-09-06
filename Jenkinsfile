@@ -121,4 +121,11 @@ pipeline {
             }
         }
     }
+        post {
+        always {
+            performance publisher {
+                sourceDataFiles('/opt/TestPlansTest.report.jtl')
+            }
+        }
+    }
 }
