@@ -20,13 +20,13 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/resetDB")
 @CrossOrigin
 public class DatabaseController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @GetMapping("/resetDB")
+    @GetMapping()
     public ResponseEntity<String> resetDB() {
         String sql;
         try {
