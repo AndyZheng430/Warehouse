@@ -117,14 +117,16 @@ pipeline {
         }
         stage('Run JMeter Tests') {
             steps {
-                sh '/opt/jmeter/bin/jmeter -n -t /opt/TestPlans/Test_Plan.jmx -l /opt/TestPlansTest.report.jtl'
+                script {
+                    sh '/opt/jmeter/bin/jmeter -n -t /opt/TestPlans/Test_Plan.jmx -l /opt/TestPlansTest.report.jtl'
+                }
             }
         }
     }
-        post {
+    post {
         always {
-            performance publisher {
-                sourceDataFiles('/opt/TestPlansTest.report.jtl')
+            script {
+                perfReport sourceDataFiles: '/opt/TestPlansTest.report.jtl'
             }
         }
     }
