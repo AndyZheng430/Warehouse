@@ -53,7 +53,7 @@ public class UpdateInventorySteps {
     @And("I have existing warehouse with the following details:")
     public void i_expand_a_warehouse_s_details(Map<String,String> detailsTable) {
 
-        String name = detailsTable.get("Name")
+        String name = detailsTable.get("Name");
         String location = detailsTable.get("Location");
         String owner = detailsTable.get("Owner");
         String capacity = detailsTable.get("Capacity");
