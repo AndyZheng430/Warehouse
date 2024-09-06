@@ -21,7 +21,7 @@ export const InventoryRecord = ({itemId, warehouseId, name, amount, handleDelete
 					<div className={`${classes.edit} ${classes.option}`} onClick={handleEdit}>
 						<MdEdit />
 					</div>
-					<div className={`${classes.delete} ${classes.option}`} onClick={handleDelete}>
+					<div className={`${classes.delete} ${classes.option}`} onClick={handleDelete} aria-label='delete'>
 						<FaTrash />
 					</div>
 				</div>
