@@ -1,13 +1,12 @@
-package resources;
+package com.skillstorm.helper;
 
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class resetDB {
+public class ResetDB {
     
-        public static sendPost() {
-        string resetDataURI = "http://localhost:8080/warehouses/delete"
+        public static void sendPost() {
+        String resetDataURI = "http://team8-backend-env.eba-utzyzrwp.us-east-1.elasticbeanstalk.com/test/resetDB";
         try {
             // URL to send the POST request to
             URL url = new URL(resetDataURI);

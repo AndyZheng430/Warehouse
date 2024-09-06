@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -22,16 +21,14 @@ import java.util.Map;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 
-public class updateInventorySteps {
+public class UpdateInventorySteps {
     
     WebDriver driver;
     WebDriverWait wait;
     WebElement clicktoEdit;
 
-    public updateInventorySteps() {
+    public UpdateInventorySteps() {
         // Initialize WebDriver instance
         FirefoxOptions options = new FirefoxOptions();
 

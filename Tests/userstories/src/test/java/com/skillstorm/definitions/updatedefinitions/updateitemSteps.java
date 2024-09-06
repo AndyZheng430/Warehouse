@@ -13,19 +13,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.time.Duration;
-import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 
-public class updateitemSteps {
+public class UpdateItemSteps {
     
     WebDriver driver;
     WebDriverWait wait;
 
-    public updateitemSteps() {
+    public UpdateItemSteps() {
         // Initialize WebDriver instance
         this.driver = new FirefoxDriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
