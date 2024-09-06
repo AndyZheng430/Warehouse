@@ -20,6 +20,24 @@ pipeline {
                 }
             }
         }
+        stage('Test Frontend'){
+            steps{
+                sh "echo Building frontend"
+                sh "cd frontend && npm run test:coverage"
+                sh "pwd"
+                withSonarQubeEnv('SonarCloud') {
+                    sh ''' 
+                    cd frontend &&
+                    npx sonar-scanner \
+                    -Dsonar.projectKey=andyzheng430_warehouse-frontend \
+                    -Dsonar.projectName=warehouse-frontend \
+                    -Dsonar.sources=src \
+                    -Dsonar.exclusions=**/__tests__/**\
+                    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+                    '''
+                }
+            }
+        }
         stage('Deploy Frontend'){
             steps{
                 script{
