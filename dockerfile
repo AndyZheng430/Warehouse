@@ -26,6 +26,14 @@ RUN jenkins-plugin-cli --plugins "maven-plugin workflow-aggregator git sonar nod
 #   --volume jenkins-data:/var/jenkins_home `
 #   --publish 8080:8080 --publish 50000:50000 myjenkins-team8
 
-# add volumes for jmeter
+# new build for jmeter
 # --volume /home/ec2-user/apache-jmeter-5.6.3:/opt/jmeter
 # --volume /home/ec2-user/TestPlans:/opt/TestPlans
+
+# docker run --name jenkins --restart=on-failure --detach `
+#   --network jenkins `
+#   --volume /var/run/docker.sock:/var/run/docker.sock `
+#   --volume jenkins-data:/var/jenkins_home `
+#   --volume /home/ec2-user/apache-jmeter-5.6.3:/opt/jmeter `
+#   --volume /home/ec2-user/TestPlans:/opt/TestPlans `
+#   --publish 8080:8080 --publish 50000:50000 myjenkins-team8
