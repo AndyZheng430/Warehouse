@@ -1,3 +1,4 @@
+@testing
 Feature: View All Warehouses
   As a user,
   I want to see all Warehouses

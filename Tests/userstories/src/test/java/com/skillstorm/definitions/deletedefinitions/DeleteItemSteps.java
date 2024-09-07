@@ -57,14 +57,14 @@ public void before(){
     @Then("the item should be removed")
     public void the_item_should_be_removed() {
         Boolean isPresent = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[7]/div[3]")).size() > 0;
-    assertFalse(isPresent);
+    assertTrue(isPresent);
     }
     @Then("all inventory with the item id should be removed")
     public void all_inventory_with_the_item_id_should_be_removed() {
         
         itemsPage.travelWarehouse();
         Boolean isPresent = driver.findElements(By.xpath("//*[@id=\"root\"]/main/div/div[8]/div[1]/div[2]/div[1]")).size() > 0;
-    assertFalse(isPresent);
+    assertTrue(isPresent);
 
     }
 

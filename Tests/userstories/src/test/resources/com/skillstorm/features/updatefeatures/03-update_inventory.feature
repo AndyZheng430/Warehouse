@@ -7,25 +7,34 @@ Feature: Update Inventory
   Background:
     Given I am on "Warehouses" page
     And I have existing warehouse with the following details:
-      | Name       | Location  | Owner      | Capacity |
-      | Woodshop   | New York  | John Doe   | 1000     | 
-  
+      | Name       | Woodshop |
+      | Location   | New York |                       
+      | Owner      | John Doe |
+      | Capacity   | 1000     | 
+
+
   Scenario: Display inventory update
-    When I click to edit item:
-      | Name       | quantity |
-      | Oak Wood   | 100 |
-    Then a window should display the item Id "1" and amount "100"
+    Given I click the inventory item
+    When I enter new inventory info:
+      | Name       | Oak Wood |
+      | Quantity   | 100      |
+    Then the main screen should display the item Id "1" and amount "100"
 
 
 #Should this be broken down into 2 separate scenarios?
-  Scenario: Successfully update the inventory item ID and amount
+  Scenario: Successfully update the inventory item ID 
     # Given I have wr warehouse "Woodshop"
     Given I click to edit item named "Oak Wood"
     When I change the inventory item Id to "5"
-    And I change the quantity to "25"
     Then the item name should be updated to:
-      | Name       | quantity |
-      | Iron Ore   | 25 |
+      | Name       | 45lb bumper plate |
+
+  Scenario: Successfully update the inventory amount 
+    # Given I have wr warehouse "Woodshop"
+    Given I click to edit the item named "Oak Wood"
+    When I change the amount to "125"
+    Then the amount should be updated to:
+      | Amount       |  125 |
 
   # Scenario: Handling an invalid quantity
   #   Given I am on the Warehouses page

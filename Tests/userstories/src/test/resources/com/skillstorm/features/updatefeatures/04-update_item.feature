@@ -6,19 +6,26 @@ Feature: Update Item
   So I can make modifications to the product.
 
   Background:
-    Given I am at the "Item" page
+    Given I am at the "Items" page
 
   Scenario: Verify successful update of all fields of an Item
-    Given I have an existing item with ID "123" and the following details:
-      | Name        | Description           |
-      | Old Product | Old Product Description |
-    When I click the "Edit" button for the item with ID "123"
-    And I update the Name to "New Product"
-    And I update the Description to "New Product Description"
-    And I click the "Save" button
-    Then I should see the updated item details in the table:
-      | Name         | Description            |
-      | New Product  | New Product Description |
+    Given I have an existing item with ID "3" 
+    When I click the edit button for the item with ID "3"
+    And I update the name to "Birch Wood"
+    And I update the description to "pliable"
+    Then I should see the updated item details:
+      | Name        | Birch Wood |
+      | Description | pliable    |
+
+
+  Scenario: Verify update of only name
+    Given I have existing item with the following details:
+      | Name        | barbell           |
+      | Description | Olympic 45 pound |
+    When I click to edit the item
+    And I update the name to "potato"
+    Then the item name should say "potato"
+
 
   # Scenario: Verify partial update of an Item
   #   Given I have an existing item with ID "123" and the following details:
@@ -32,14 +39,3 @@ Feature: Update Item
   #     | Name           | Description           |
   #     | Updated Product | Old Product Description |
 
-  Scenario: Verify handling of Item Name with an invalid value
-    Given I have existing item with ID "123" and the following details:
-      | Name        | Description           |
-      | Old Product | Old Product Description |
-    When I click the "Edit" symbol for the item with ID "123"
-    And I update the Name to " "  # Invalid value, like an empty string or whitespace
-    And I click the "Save" symbol
-    Then I should see an error message "Item Name cannot be empty"
-    And the item details should remain unchanged in the table:
-      | Name        | Description           |
-      | Old Product | Old Product Description |

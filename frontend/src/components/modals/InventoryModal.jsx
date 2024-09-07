@@ -96,7 +96,7 @@ export const InventoryModal = ({setShowModal, warehouseId, inventory, getWarehou
           </div>
           <div>
             <hr />
-            <button onSubmit={(e)=>handleSubmit(e)}>Submit</button>
+            <button type="submit">Submit</button>
           </div>
         </form>
       </div>

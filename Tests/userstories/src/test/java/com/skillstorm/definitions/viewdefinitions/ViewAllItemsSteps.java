@@ -22,11 +22,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 import com.skillstorm.helper.ResetDB;
-import com.skillstorm.pages.WarehousePage;
+import com.skillstorm.pages.ItemsPage;
 
 public class ViewAllItemsSteps {
     WebDriver driver;
-    private WarehousePage warehousePage;
+    private ItemsPage itemsPage;
 
     @Before
     public void setup(){
@@ -39,7 +39,7 @@ public class ViewAllItemsSteps {
 
         //create new POM object
         this.driver = new ChromeDriver(options);
-        this.warehousePage = new WarehousePage(this.driver);
+        this.itemsPage = new ItemsPage(this.driver);
     }
 
     @After
@@ -50,13 +50,13 @@ public class ViewAllItemsSteps {
     }
 
     @Given("I am at the {string} page")
-    public void i_am_on_the_landing_page(String string) {
+    public void i_am_on_the_items_page(String string) {
 
         //find element with class _container_1avss_1
         //then find subset element within it and then get the text
-        WebElement titleParent = driver.findElement(By.className("_container_1avss_1"));
-        WebElement title = titleParent.findElement(By.className("_title_1avss_15"));
-        assertEquals(title.getText(),string);
+        this.itemsPage.getMain();
+        
+        assertEquals(this.itemsPage.getTitle(),string);
 
 
 
@@ -68,7 +68,7 @@ public class ViewAllItemsSteps {
     }
 
     @When("there is one or more items created")
-    public void there_is_one_or_more_warehouses() {
+    public void there_is_one_or_more_items() {
         //findElements will return list so greater than 0 we have items!
         Boolean isPresent = driver.findElements(By.className("_record_ecf38_1")).size() > 0;
         assertTrue(isPresent);
@@ -97,23 +97,5 @@ public class ViewAllItemsSteps {
             assertTrue(Item.findElement(By.className("_description_ecf38_39")).isDisplayed(), "Description is missing");
         }
     }
-
-    @When("there is no items created")
-    public void there_is_no_current_items_existing() {
-        // Optionally clear any existing items or ensure that no items exist
-        // Boolean isNotPresent = driver.findElements(By.className("_record_ecf38_1")).size() <= 0;
-        // assertFalse(isNotPresent);
-
-        assertTrue(true);
-    }
-
-    @Then("I should see an empty list of items created")
-    public void i_should_see_an_empty_list_of_items_created() {
-        // Verify that the list of Items is empty
-        // List<WebElement> itemList = driver.findElements(By.className("_record_ecf38_1"));
-        // assertTrue(itemList.isEmpty(),"Item list should be empty");
-        assertTrue(true);
-    }
-
 
 }

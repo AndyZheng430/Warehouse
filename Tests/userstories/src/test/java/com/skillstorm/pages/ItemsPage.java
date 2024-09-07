@@ -12,10 +12,15 @@ public class ItemsPage {
 
     //class fields
     private WebDriver driver;
-    private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
+    //aws
+    //private static final String url = "http://team8-frontend.s3-website-us-east-1.amazonaws.com/";
 
-
+    //local
+    private static final String url = "http://localhost:5173/items";
     //Creating webelements for elements on the Items page that I will need to access.
+
+    @FindBy(className = "_title_1avss_15")
+    private WebElement itemsTitle;
 
     @FindBy(xpath = "//a[@href='/items']")
     private WebElement itemLink;
@@ -63,6 +68,10 @@ public class ItemsPage {
             e.printStackTrace();
         }
         this.driver.get(url);
+    }
+
+    public String getTitle(){
+        return itemsTitle.getText();
     }
 
     //this method travels from the main page to the items page
