@@ -16,12 +16,13 @@ SonarQube Results:
 Jmeter Report: 
 ![Image of Jmeter Report](images/jmeter_report.jpg)
 
-Cucumber Report: 
-https://reports.cucumber.io/reports/80d98f5f-0dde-403e-9541-3aa20d6425be
-https://reports.cucumber.io/reports/b952c0c3-f0d8-47b9-aa90-82e252f247b9
-https://reports.cucumber.io/reports/4f936c8f-1e87-4204-8daf-c1258e7994dd
-https://reports.cucumber.io/reports/6cdd278d-2a15-48f1-af12-967584939e55
-https://reports.cucumber.io/reports/fe7ca8c3-4c40-4366-b00d-6331ea8394ff
+UPDATED Cucumber Report: 
+https://reports.cucumber.io/reports/b54a5aed-648a-41de-ba9a-8129d66744ec
+https://reports.cucumber.io/reports/5930d72c-1a2a-459d-a7c8-140168650846
+https://reports.cucumber.io/reports/f296d1ea-6f5a-4c06-af6f-17f07b3bd967
+https://reports.cucumber.io/reports/80434242-148d-4988-8ef1-b96e5513c566
+https://reports.cucumber.io/reports/c95a58d0-9c2f-4f7f-8c0a-4a17bfe35331
+
 ![Cucumber Report Sample](images/cucumber.jpg)
 
 Jacoco Backend Report:
