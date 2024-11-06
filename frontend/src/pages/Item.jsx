@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../components/header/Header.jsx';
-import { ItemLabel } from '../components/labels/ItemLabel.jsx';
-import { ItemRecord } from '../components/records/ItemRecord.jsx';
 import { ItemModal } from '../components/modals/ItemModal.jsx';
+import { ItemTable } from '../components/tables/ItemTable.jsx';
 
 export const Item = () => {
 
@@ -25,20 +24,6 @@ export const Item = () => {
 			.catch(error => {console.log(error)});
 	}
 
-	// delete item request
-	const handleDelete = async (id) => {
-		await fetch(import.meta.env.VITE_DELETE_ITEM+"/"+id, {
-			method: "DELETE",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-		.then(console.log("Deleted " + id))
-		.catch(error => {console.log(error)});
-
-		getItems();
-	}
-
 	// display Modal UI for items
 	const handleEdit = (item) => {
 		setEditItem(item);
@@ -49,18 +34,11 @@ export const Item = () => {
 		<>
 			<Header title="Items" setShowModal={setShowItemModal} />
 			<hr style={{width: '90%'}}/>
-			<ItemLabel />
-			<hr />
-			{items?.length > 0 && items.map(
-				item => (
-					<ItemRecord 
-						key={item.id} 
-						item={item} 
-						handleDelete={() => handleDelete(item.id)} 
-						handleEdit={() => handleEdit(item)} 
-					/>
-				)
-			)}
+			<ItemTable 
+				items={items}
+				handleEdit={handleEdit}
+				getItems={getItems}
+			/>
 			{showItemModal && <ItemModal 
 				setShowModal={setShowItemModal} 
 				editItem={editItem} 

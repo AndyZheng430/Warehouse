@@ -1,0 +1,74 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    overflow: hidden;
+}
+
+.container {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 98%;
+    margin: 0 auto;
+}
+
+.row:hover {
+    background-color: lightgray;
+    overflow: hidden;
+}
+
+.row {
+    border-top: 1px solid black;
+    overflow: hidden;
+}
+
+td {
+    padding: 6px 0px;
+}
+
+th {
+    padding: 10px 0px;
+    border-bottom: 1px solid black;
+}
+
+.options {
+    width: 25%;
+}
+
+.view {
+    background-color: #48A14D;
+    color: white;
+    border: 2px solid #48A14D;
+    margin: 0 4px;
+}
+
+.view:hover {
+    border: 2px solid #48A14D;
+    background-color: white;
+    color: #48A14D;
+}
+
+.edit {
+    background-color: #8FB0CE;
+    color: white;
+    border: 2px solid #8FB0CE;
+    margin: 0 4px;
+}
+
+.edit:hover {
+    border: 2px solid #8FB0CE;
+    background-color: white;
+    color: #8FB0CE;
+}
+
+.delete {
+    background-color: #B33F40;
+    color: white;
+    border: 2px solid #B33F40;
+    margin: 0 4px;
+}
+
+.delete:hover {
+    background-color: white;
+    color: #B33F40;
+    border: 2px solid #B33F40;
+}
